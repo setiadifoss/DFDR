@@ -106,7 +106,7 @@
                 $.ajax({
                     type: "GET",
                     enctype: "multipart/form-data",
-                    url: "{{ route('LaravelInstaller::environmentTesting') }}",
+                    url: "{{ route('LaravelInstaller::environmentCheckConnection') }}",
                     data: {
                             'database_connection': db_property[0],
                             'database_hostname' : db_property[1],
@@ -119,7 +119,8 @@
                         'X-CSRF-Token': '{{ csrf_token() }}',
                     },
                     success: function(data){
-                        if (data == 'true')
+                        // console.log(data);
+                        if (data.success == true)
                         {
                             $('#error_alert').show();
                             $('#error_alert').css('background-color', '#25bd11');

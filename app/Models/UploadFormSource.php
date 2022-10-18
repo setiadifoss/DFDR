@@ -10,7 +10,7 @@ class UploadFormSource extends Model
     use HasFactory;
     protected $table = 'upload_form_source';
     protected $fillable = [
-      'Source',
+      'source',
       'upload_form_id'
     ];
 

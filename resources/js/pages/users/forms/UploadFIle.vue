@@ -36,13 +36,15 @@
                         id="titleHelp"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.title.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Title is required</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Title
+                        is required</small
                       >
                       <small
                         id="titleHelp"
                         class="form-text text-muted"
                         v-if="sameTitle && $v.form.title.required"
-                        ><i class="fa fa-times"></i>&nbsp; Same Title already exist</small
+                        ><i class="fa fa-times"></i>&nbsp; Same Title already
+                        exist</small
                       >
                     </div>
                   </div>
@@ -55,9 +57,7 @@
                         v-model="form.category"
                         aria-describedby="categoryHelp"
                       >
-                        <option value="" selected disabled
-                          >- - -</option
-                        >
+                        <option value="" selected disabled>- - -</option>
                         <option
                           v-for="(cat, c) in categories"
                           :key="c"
@@ -69,7 +69,8 @@
                         id="categoryHelp"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.category.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Please choose one</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Please
+                        choose one</small
                       >
                     </div>
                   </div>
@@ -83,7 +84,8 @@
                         id="descError"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.description.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Description is required</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                        Description is required</small
                       >
                     </div>
                   </div>
@@ -104,7 +106,8 @@
                         id="publisherHelp"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.publisher.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Publisher is required</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                        Publisher is required</small
                       >
                     </div>
                   </div>
@@ -123,7 +126,8 @@
                         id="dateError"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.date.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Date is required</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Date is
+                        required</small
                       >
                     </div>
                   </div>
@@ -138,9 +142,7 @@
                         v-model="form.language"
                         aria-describedby="languageError"
                       >
-                        <option value="" selected disabled
-                          >- - -</option
-                        >
+                        <option value="" selected disabled>- - -</option>
                         <option
                           v-for="(lg, d) in languages"
                           :key="d"
@@ -152,7 +154,8 @@
                         id="languageError"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.language.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Language is required</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                        Language is required</small
                       >
                     </div>
                   </div>
@@ -171,7 +174,8 @@
                         id="relationHelp"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.relation.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Relation is required</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                        Relation is required</small
                       >
                     </div>
                   </div>
@@ -186,9 +190,7 @@
                         v-model="form.right_management"
                         aria-describedby="right_managementHelp"
                       >
-                        <option value="" selected disabled
-                          >- - -</option
-                        >
+                        <option value="" selected disabled>- - -</option>
                         <option value="Open"> Open</option>
                         <option value="Close"> Close</option>
                       </select>
@@ -196,7 +198,8 @@
                         id="right_managementHelp"
                         class="form-text text-muted"
                         v-if="submitted && !$v.form.right_management.required"
-                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Please choose one</small
+                        ><i class="fa fa-info-circle text-xs"></i>&nbsp; Please
+                        choose one</small
                       >
                     </div>
                   </div>
@@ -221,7 +224,8 @@
                             id="creatorHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.creator.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Creator is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Creator is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -269,9 +273,7 @@
                             placeholder="Enter subject"
                             :name="`form.subject[${index}][subject_name]`"
                           >
-                            <option value="" selected disabled
-                              >- - -</option
-                            >
+                            <option value="" selected disabled>- - -</option>
                             <option
                               v-for="(sub, d) in subjects"
                               :key="d"
@@ -284,7 +286,8 @@
                             id="subjectHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.subject.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Please choose one</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Please choose one</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -334,7 +337,8 @@
                             id="typeHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.type.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Type is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Type is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -384,7 +388,8 @@
                             id="formatHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.format.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Format is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Format is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -436,7 +441,8 @@
                             id="contributorHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.contributor.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Contributor is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Contributor is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -488,7 +494,8 @@
                             id="identifierHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.identifier.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Identifier is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Identifier is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -538,7 +545,8 @@
                             id="sourceHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.source.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Source is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Source is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -590,7 +598,8 @@
                             id="coverageHelp"
                             class="form-text text-muted"
                             v-if="submitted && $v.form.coverage.$error"
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Coverage is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Coverage is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -619,7 +628,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                       <div
                         class="row"
@@ -638,9 +647,7 @@
                               `form.division_information[${index}][division_information_name]`
                             "
                           >
-                            <option value="" selected disabled
-                              >- - -</option
-                            >
+                            <option value="" selected disabled>- - -</option>
                             <option
                               v-for="(dv, d) in divisions"
                               :key="d"
@@ -655,7 +662,8 @@
                             v-if="
                               submitted && $v.form.division_information.$error
                             "
-                            ><i class="fa fa-info-circle text-xs"></i>&nbsp; Division is required</small
+                            ><i class="fa fa-info-circle text-xs"></i>&nbsp;
+                            Division is required</small
                           >
                         </div>
                         <div class="col-md-4">
@@ -686,44 +694,75 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <div class="row">
-                        <div>
-                          <!-- {{ form.file_upload }} -->
-                        </div>
-                        <div class="col-md-10">
-                          <label for="upload_file">File</label>
-                          <input
-                            type="file"
-                            ref="file"
-                            multiple
-                            @change="handleUploadCard()"
-                            class="form-control-file"
-                            id="photo"
-                          />
 
-                          <small
-                            id="upload_fileHelp"
-                            class="form-text text-muted"
-                            v-if="submitted && !$v.form.file_upload.required"
-                          >
-                            <i class="fa fa-info-circle text-xs"></i>&nbsp; File is required
-                          </small>
-                          <!-- <small
-                            id="upload_fileHelp"
-                            class="form-text text-muted"
-                            v-if="$v.form.file_upload.required && wrongFile"
-                            >Format file tidak didukung</small
-                          > -->
+                <!-- File upload -->
+                <b-row>
+                  <div
+                    v-for="(file, i) in form.file_upload"
+                    :key="i"
+                    class="ml-3"
+                  >
+                    <!-- Form File upload  -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-8">
+                              <label for="upload_file">File{{ i + 1 }}</label>
+                              <input
+                                type="file"
+                                ref="documentFile"
+                                @change="handleUploadCard(i)"
+                                class="form-control-file"
+                                id="photo"
+                              />
+
+                              <small
+                                id="upload_fileHelp"
+                                class="form-text text-muted"
+                                v-if="
+                                  submitted && !$v.form.file_upload.required
+                                "
+                              >
+                                <i class="fa fa-info-circle text-xs"></i>&nbsp;
+                                File is required
+                              </small>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group mt-4">
+                                 <b-form-checkbox v-model="form.is_private[i]" name="check-button" switch>
+    </b-form-checkbox>
+                                <b-button
+                                  v-if="form.file_upload.length > 1"
+                                  v-b-modal.modal-1
+                                  variant="danger"
+                                  v-b-tooltip.hover
+                                  title="Delete"
+                                  v-on:click="removeForm(i)"
+                                  ><i class="fas fa-fw fa-trash"></i
+                                ></b-button>
+                                <b-button
+                                  v-b-modal.modal-1
+                                  variant="success"
+                                  v-b-tooltip.hover
+                                  title="Add"
+                                  v-on:click="addForm(i)"
+                                  ><i class="fas fa-fw fa-plus"></i
+                                ></b-button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <!-- End Form file upload -->
                   </div>
-                </div>
+                </b-row>
+
+                <!-- End File upload  -->
+
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -764,7 +803,9 @@ export default {
       wrongFile: false,
       sameTitle: false,
       content: "",
+      // files: [],
       form: {
+        is_private: [],
         title: "",
         category: "",
         description: "",
@@ -794,8 +835,8 @@ export default {
         identifier: [{ identifier_name: "" }],
         source: [{ source_name: "" }],
         coverage: [{ coverage_name: "" }],
-        division_information: [{ division_information_name: "" }],
-        file_upload: [],
+        // division_information: [{ division_information_name: "" }],
+        file_upload: [{}],
       },
       userdata: JSON.parse(localStorage.getItem("user")),
     };
@@ -851,11 +892,11 @@ export default {
           coverage_name: { required },
         },
       },
-      division_information: {
-        $each: {
-          division_information_name: { required },
-        },
-      },
+      // division_information: {
+      //   $each: {
+      //     division_information_name: { required },
+      //   },
+      // },
     },
   },
   computed: {
@@ -880,53 +921,55 @@ export default {
     this.$store.dispatch("getDivision");
   },
   methods: {
+    removeForm(i) {
+      this.form.file_upload.splice(i, 1);
+    },
+    addForm(i) {
+      this.form.file_upload.push({ name: "", file: null });
+    },
     capFLetter(string) {
-      return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+      return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+        letter.toUpperCase()
+      );
     },
 
-    handleUploadCard() {
-      
-      if (this.$refs.file.files.length != 0)
-      {
-        console.log(this.$refs.file.files[0].type);
+    handleUploadCard(i) {
+      console.log(this.$refs.documentFile[i].files[0]);
+      // console.log(this.$refs.documentFile);
+      this.form.file_upload[i] = this.$refs.documentFile[i].files[0];
+      // if (this.$refs.file.files.length != 0) {
+      //   console.log(this.$refs.file.files[0].type);
 
-        this.form.file_upload = this.$refs.file.files;
-        // this.form.upload_card = this.$refs.file.files[0];
-        // var type = this.$refs.file.files[0].type;
+      //   this.form.file_upload[i] = this.$refs.file.files[0];
+      //   // this.form.upload_card = this.$refs.file.files[0];
+      //   // var type = this.$refs.file.files[0].type;
 
-        // if (type === 'application/pdf')
-        //   this.wrongFile = false;
-        // else
-        //   this.wrongFile = true;
-      }
-      else
-      {
-        this.wrongFile = false;
-      }
+      //   // if (type === 'application/pdf')
+      //   //   this.wrongFile = false;
+      //   // else
+      //   //   this.wrongFile = true;
+      // } else {
+      //   this.wrongFile = false;
+      // }
       // console.log(this.wrongFile);
     },
 
     checkTitle() {
-      
-      if (this.form.title != "")
-      {
+      if (this.form.title != "") {
         let formData = new FormData();
         formData.append("title", this.form.title);
         // console.log(formData);
-        axios.post("/api/upload-form/checkTitle", formData)
-        .then((res) => {
-          if(res.data.status == "Success")
-            this.sameTitle = false;
-          else
-            this.sameTitle = true;
-          // console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      }
-      else
-        this.sameTitle = false;
+        axios
+          .post("/api/upload-form/checkTitle", formData)
+          .then((res) => {
+            if (res.data.status == "Success") this.sameTitle = false;
+            else this.sameTitle = true;
+            // console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else this.sameTitle = false;
     },
 
     resetData() {
@@ -947,8 +990,8 @@ export default {
       this.form.identifier = "";
       this.form.source = "";
       this.form.coverage = "";
-      this.form.division_information = "";
-      this.form.file_upload = "";
+      // this.form.division_information = "";
+      this.form.file_upload = [];
       this.$refs.file.value = null;
     },
 
@@ -1072,54 +1115,67 @@ export default {
       formData.append("language", this.form.language);
       formData.append("relation", this.form.relation);
       formData.append("coverage", JSON.stringify(this.form.coverage));
-      formData.append(
-        "division_information",
-        JSON.stringify(this.form.division_information)
-      );
+      // formData.append(
+      //   "division_information",
+      //   JSON.stringify(this.form.division_information)
+      // );
       for (const i of Object.keys(this.form.file_upload)) {
+        let is_private = this.form.is_private[i] == undefined ? 0 : 1;
         formData.append(`file_upload[${i}]`, this.form.file_upload[i]);
+        formData.append(`is_private[${i}]`, is_private);
       }
+      //         // <!-- WE APPEND THE AVATAR TO THE FORMDATA WE'RE GONNA POST -->
+      //         for (var i = 0; i < this.form.file_upload.length; i++) {
+      //         formData.append(`file_upload[${i}]`, this.form.file_upload[i]);
+      //         console.log(this.form.file_upload[i]);
+      // }
+
+      // for (const i of Object.keys(this.form.file_upload)) {
+      //   formData.append(`file_upload[${i}]`, this.form.file_upload[i]);
+      // }
+      // console.log(...formData);
+
       formData.append("user_id", this.form.user_id);
       formData.append("right_management", this.form.right_management);
       formData.append("upload_for", this.userdata.role);
 
-      
-      if (this.sameTitle)
+      if (this.sameTitle) {
+        Vue.swal({
+          icon: "warning",
+          title:
+            "Submission with title " +
+            this.capFLetter(this.form.title) +
+            " is exist!",
+          text:
+            "We detected data similarities between your input and an existing submission.",
+        });
+      }
+      else if (this.wrongFile)
       {
         Vue.swal({
           icon: "warning",
-          title: "Submission with title "+ this.capFLetter(this.form.title) + " is exist!",
-          text: "We detected data similarities between your input and an existing submission.",
-        });        
+          title: "Format File Tidak Didukung!",
+          text: "Perhatikan kembali format file yang akan diupload",
+        });
       }
-      // else if (this.wrongFile)
-      // {
-      //   Vue.swal({
-      //     icon: "warning",
-      //     title: "Format File Tidak Didukung!",
-      //     text: "Perhatikan kembali format file yang akan diupload",
-      //   });        
-      // }
-      else 
-      {
-        axios
-          .post("/api/upload-form", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => {
-            this.loading = false;
-            this.resetData();
-            Vue.swal({
-              icon: "success",
-              title: "Successfully Uploaded!",
-            });
-            vm.$router.push("/my-upload");
-            // console.log(res);
+      else {
+      axios
+        .post("/api/upload-form", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          this.loading = false;
+          // this.resetData();
+          Vue.swal({
+            icon: "success",
+            title: "Successfully Uploaded!",
           });
+          vm.$router.push("/all-deposit");
+          // console.log(res);
+        });
       }
-      
     },
   },
 };

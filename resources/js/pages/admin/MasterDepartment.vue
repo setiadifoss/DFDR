@@ -112,10 +112,13 @@
               >
                 Cancel
               </button>
+
+              
             </form>
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -164,6 +167,8 @@ export default {
     this.$store.dispatch("getDepartments");
   },
   methods: {
+    onRegister(){},
+    handleUploadCard(){},
     handleCreatedDepartment() {
       this.submitted = true;
       var vm = this;

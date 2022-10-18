@@ -58,8 +58,8 @@
                   Reject
                 </span>
               </template>
-              <template #empty="scope">
-                <h4>{{ scope.emptyText }}</h4>
+              <template #empty="">
+                 <h4>loading in progress</h4>
               </template>
               <template #emptyfiltered="scope">
                 <h4>{{ scope.emptyFilteredText }}</h4>

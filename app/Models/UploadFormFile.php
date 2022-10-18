@@ -14,7 +14,8 @@ class UploadFormFile extends Model
       'file_name',
       'file_size',
       'file_extention',
-      'upload_form_id'
+      'upload_form_id',
+      'is_private'
     ];
 
     public function uploadForm()

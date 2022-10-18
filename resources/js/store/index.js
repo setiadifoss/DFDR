@@ -9,6 +9,8 @@ Vue.use(Vuex);
 const state = {
   token: localStorage.getItem("token") || "",
   status: "",
+  json: "",
+  json_id: "",
   user: {},
   loading: true,
   users: [],
@@ -101,6 +103,17 @@ const actions = {
     axios.get("/api/user/main").then((response) => {
       commit("SET_USERS", response.data.data.user);
     });
+  },
+
+
+  getJson({ commit },payload) {
+    let data = {
+      id: payload.id,
+      data: payload.data,
+    }
+    // axios.get("/api/user").then((response) => {
+      commit("SET_JSON", data);
+    // });
   },
 
   getEditor({ commit }) {
@@ -277,6 +290,10 @@ const mutations = {
   SET_UPLOADEDFILEAPPROVED(state, uploadedfileapproved) {
     state.uploadedfileapproved = uploadedfileapproved;
   },
+  SET_JSON(state, data) {
+    state.json = data.data;
+    state.json_id = data.id;
+  }
 };
 
 //export store module

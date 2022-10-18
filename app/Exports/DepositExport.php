@@ -44,8 +44,8 @@ class DepositExport implements FromView, ShouldAutoSize, WithEvents
             AfterSheet::class    => function(AfterSheet $event) {
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(40);
                 $event->sheet->getDelegate()->getRowDimension('2')->setRowHeight(30);
-                $event->sheet->getStyle('A1:I2')->getAlignment()->setVertical('center');
-                $event->sheet->getStyle('A2:I2')->getAlignment()->setHorizontal('center');  
+                $event->sheet->getStyle('A1:T2')->getAlignment()->setVertical('center');
+                $event->sheet->getStyle('A2:T2')->getAlignment()->setHorizontal('center');  
             },
         ];
     }

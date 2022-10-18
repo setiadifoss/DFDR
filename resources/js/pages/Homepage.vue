@@ -1,59 +1,44 @@
 <template>
   <div>
     <div>
-      <b-carousel
-        id="carousel-1"
-        v-model="slide"
-        :interval="4000"
-        controls
-        indicators
-        background="#ababab"
-        img-width="1024"
-        img-height="300"
-        style="text-shadow: 1px 1px 2px #333;"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-      >
-        <!-- Text slides with image -->
-        <b-carousel-slide
-          caption="Digital Repository"
-          text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-          img-src="/banner/1.jpg"
-        ></b-carousel-slide>
+      <carousel :per-page="1" :navigationEnabled="true">
+        <!-- <template v-for="(image) in images"> -->
+        <!-- <slide>
+       <div>
+  <b-img src="http://dfdr.test/storage/uploads/file_upload/des3.png" fluid alt="Responsive image"></b-img>
+</div>
+    </slide>
+       <slide>
+        testing 2
+    </slide> -->
+        <template v-for="(image, i) in images">
+          <slide :key="i">
+            <div v-if="image.type == 1">
+              <b-img
+                :src="getPath(image.path)"
+                fluid
+                alt="Responsive image"
+              ></b-img>
+            </div>
+            <div v-else>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                  class="embed-responsive-item"
+                  :src="toEmbed(image.path)"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </slide>
+        </template>
 
-        <!-- Slides with custom text -->
-        <b-carousel-slide img-src="/banner/2.jpg">
-          <h1>Digital Repository</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-        </b-carousel-slide>
-
-        <!-- Slides with image only -->
-        <b-carousel-slide img-src="/banner/3.jpg"></b-carousel-slide>
-
-        <!-- Slides with img slot -->
-        <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-        <b-carousel-slide>
-          <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              width="1024"
-              height="300"
-              src="/banner/4.jpg"
-              alt="image slot"
-            >
-          </template>
-        </b-carousel-slide>
-
-        <b-carousel-slide img-src="/banner/6.jpg"></b-carousel-slide>
-      </b-carousel>
+        <!-- </template> -->
+      </carousel>
     </div>
 
     <!-- section jumbotron -->
     <div class="jumbotron">
       <div class="container">
-        
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -84,7 +69,13 @@
 
                     <div class="col-md-3">
                       <div>
-                        <h5><i class="fa fa-angle-double-down" style="font-size:15px;"></i>&nbsp; <strong>Collections</strong></h5>
+                        <h5>
+                          <i
+                            class="fa fa-angle-double-down"
+                            style="font-size: 15px"
+                          ></i
+                          >&nbsp; <strong>Collections</strong>
+                        </h5>
                         <ul style="list-style-type: circle" class="mt-2">
                           <!-- <li v-for="(cat, c) in categories" :key="c">
                             <p
@@ -147,9 +138,15 @@
                     </div>
                     <div class="col-md-3">
                       <div>
-                        <h5><i class="fa fa-angle-double-down" style="font-size:15px;"></i>&nbsp; <strong>Contributors</strong></h5>
+                        <h5>
+                          <i
+                            class="fa fa-angle-double-down"
+                            style="font-size: 15px"
+                          ></i
+                          >&nbsp; <strong>Contributors</strong>
+                        </h5>
                         <ul style="list-style-type: circle" class="mt-2">
-                          <li v-for="(cat, c) in creators.slice(0,5)" :key="c">
+                          <li v-for="(cat, c) in creators.slice(0, 5)" :key="c">
                             <p
                               class="cat"
                               style="cursor: pointer"
@@ -163,7 +160,13 @@
                     </div>
                     <div class="col-md-3">
                       <div>
-                        <h5><i class="fa fa-angle-double-down" style="font-size:15px;"></i>&nbsp; <strong>Lates</strong></h5>
+                        <h5>
+                          <i
+                            class="fa fa-angle-double-down"
+                            style="font-size: 15px"
+                          ></i
+                          >&nbsp; <strong>Lates</strong>
+                        </h5>
                         <ul style="list-style-type: circle" class="mt-2">
                           <li>
                             <p
@@ -190,7 +193,11 @@
                       <div class="col col-md-12 mt-2">
                         <router-link
                           :to="{ name: 'Login' }"
-                          class="btn btn-primary btn-sm btn-block margin-top bg-blue"
+                          class="
+                            btn btn-primary btn-sm btn-block
+                            margin-top
+                            bg-blue
+                          "
                           >Login</router-link
                         >
                       </div>
@@ -249,13 +256,9 @@
         <div class="col-md-3 mt-2">
           <div class="card p-1">
             <div class="card-body">
-              <h4 class="text-center">What Is <b>Digital Repository?</b></h4>
-              <p class="text-justify mt-2">
-                &nbsp;&nbsp;&nbsp;&nbsp;<b>Digital Repository</b> is Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Ipsum deserunt
-                quibusdam vel, ullam, error, aperiam voluptate nobis voluptatem
-                cum consectetur quisquam aut? Praesentium facere molestiae
-                aperiam repellendus distinctio vero amet.
+              <h4 class="text-center">What Is <b v-html="title">?</b></h4>
+              <p class="text-justify mt-2" v-html="description">
+                &nbsp;&nbsp;&nbsp;&nbsp;<b v-html="title"></b>
               </p>
             </div>
           </div>
@@ -296,16 +299,22 @@
         </div>
       </div>
     </div>
-    
-
   </div>
-
 </template>
 
 <style scoped>
 .card {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 1rem !important;
+}
+
+img,
+video,
+object,
+embed {
+  max-width: 100%;
+  height: auto;
+  overflow: hidden !important;
 }
 
 .btn-primary {
@@ -318,14 +327,26 @@
 }
 </style>
 <script>
+import { Carousel, Slide } from "vue-carousel";
 export default {
+  components: {
+    Carousel,
+    Slide,
+  },
   data() {
     return {
+      showVideo: false,
+      isInstalled : false,
+      videoId: null,
+      images: [],
       news: [],
+      title: null,
+      embed: null,
+      description: null,
       loading: false,
       slide: 0,
       sliding: null,
-      install: false,
+      install: true,
       form: {
         search_key: "",
       },
@@ -340,25 +361,63 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("getCreator");
-
     this.preUsed();
+    this.$store.dispatch("getCreator");
+    this.getImages();
     this.preAdmin();
     // this.$store.dispatch("getCategory");
     this.getNews();
-    
-    
+    this.getDescription();
+    this.getHeader();
+    // this.getYoutube("https://www.youtube.com/watch?v=qXlZVDA_S_s");
 
     // console.log(this.creators);
 
     // console.log("homepage");
   },
   methods: {
+    toEmbed(url) {
+      var str = url;
+      var res = str.split("=");
+      var embeddedUrl = "https://www.youtube.com/embed/" + res[1];
+      // document.getElementById("demo").innerHTML = res;
+      this.embed = embeddedUrl;
+      return embeddedUrl;
+    },
+    getYoutube(url) {
+      return this.$youtube.getIdFromURL(url);
+      this.startTime = this.$youtube.getTimeFromURL(url);
+    },
+    getPath(link) {
+      var filename = link.substring(link.lastIndexOf("/") + 1);
+      let file_path = "/storage/uploads/file_upload/" + filename;
+      return file_path;
+    },
+    getImages() {
+      axios
+        .get("/api/template/images")
+        .then((response) => {
+          this.images = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     onSlideStart(slide) {
-      this.sliding = true
+      this.sliding = true;
     },
     onSlideEnd(slide) {
-      this.sliding = false
+      this.sliding = false;
+    },
+    getDescription() {
+      axios.get("/api/template/home/2").then((response) => {
+        this.description = response.data.data.content;
+      });
+    },
+    getHeader() {
+      axios.get("/api/template/home/1").then((response) => {
+        this.title = response.data.data.content;
+      });
     },
 
     preUsed() {
@@ -367,7 +426,7 @@ export default {
       axios.get("/api/preUsed")
       .then((res) => {
         
-        // console.log(res.data.data);
+        console.log(res.data.data);
         this.install = res.data.data.file;
 
         if (!this.install) {
@@ -379,7 +438,7 @@ export default {
       // return val;
     },
 
-    preAdmin() {
+     preAdmin() {
       axios.get("/api/preAdmin")
       .then((res) => {
         // console.log(res.data.data);
@@ -403,28 +462,28 @@ export default {
     onSearch() {
       this.$router.push({
         name: "SubmissionFilter",
-        params: { keySearch: this.form.search_key, part: 'Search' },
+        params: { keySearch: this.form.search_key, part: "Search" },
       });
     },
 
     onCollections(val) {
       this.$router.push({
         name: "SubmissionFilter",
-        params: { keySearch: val, part: 'Collection' },
+        params: { keySearch: val, part: "Collection" },
       });
     },
 
     onThisMonth() {
       this.$router.push({
         name: "SubmissionFilter",
-        params: { keySearch: '', part: 'This_Month' },
+        params: { keySearch: "", part: "This_Month" },
       });
     },
 
     onContributors(val) {
       this.$router.push({
         name: "SubmissionFilter",
-        params: { keySearch: val, part: 'Creator' },
+        params: { keySearch: val, part: "Creator" },
       });
     },
   },

@@ -32,6 +32,7 @@
               :filter="filter"
               show-empty
             >
+          
               <template #cell(descriptions)="data">
                 <div v-html="data.item.description"></div>
               </template>
@@ -73,11 +74,12 @@
                   ><i class="fas fa-fw fa-trash-alt"></i
                 ></b-button>
               </template>
-              <template #empty="scope">
-                <h4>{{ scope.emptyText }}</h4>
+              <template #empty="">
+              
+                <h4>loading in progress</h4>
               </template>
-              <template #emptyfiltered="scope">
-                <h4>{{ scope.emptyFilteredText }}</h4>
+              <template #emptyfiltered="">
+                <h4>loading in progress</h4>
               </template>
             </b-table>
             <b-pagination

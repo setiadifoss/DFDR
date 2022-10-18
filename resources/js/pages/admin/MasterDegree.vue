@@ -20,6 +20,18 @@
                   placeholder="Type to Search"
                 ></b-form-input>
               </b-col>
+
+              <b-col>
+
+                   <b-button
+                variant="success"
+                class="btn-sm float-right ml-1"
+                v-b-tooltip.hover
+                title="Export as Excel"
+                v-on:click.prevent="downloadExcel()"
+                ><i class="fas fa-fw fa-file-excel"></i
+              ></b-button>
+              </b-col>
             </b-row>
             <b-table
               hover
@@ -84,8 +96,9 @@
                 <small
                   id="subjectError"
                   class="form-text text-muted"
-                  v-if="submitted && !$v.form.subject_name.required"
-                  ><i class="fa fa-info-circle text-xs"></i>&nbsp; Subject name is required</small
+                  v-if="submittedForm && !$v.form.subject_name.required"
+                  ><i class="fa fa-info-circle text-xs"></i>&nbsp; Subject name
+                  is required</small
                 >
               </div>
               <button
@@ -112,6 +125,36 @@
               >
                 Cancel
               </button>
+
+              <input
+                type="file"
+                class="float-right form-control mt-2"
+                id="upload_card"
+                ref="file1"
+                aria-describedby="fileError"
+                v-on:change="handleUploadCard()"
+              />
+
+              <button
+                type="submit"
+                class="btn btn-sm btn-primary float-right mr-1 mt-2"
+                v-on:click.prevent="onRegister()"
+              >
+                <i class="fas fa-upload fa-sm text-white-50"></i>&nbsp; Import
+              </button>
+              <small
+                id="fileError"
+                class="form-text text-muted"
+                v-if="submitted && !$v.form.fileExcel.required"
+                >Harap upload excel file</small
+              >
+              <small
+                id="fileError"
+                class="form-text text-muted"
+                v-if="$v.form.fileExcel.required && wrongFormat & !submitted"
+                ><i class="fa fa-times"></i>&nbsp; Format file tidak
+                didukung</small
+              >
             </form>
           </div>
         </div>
@@ -121,9 +164,9 @@
 </template>
 
 <style scoped>
-  .text-muted {
-    color: red !important;
-  }
+.text-muted {
+  color: red !important;
+}
 </style>
 
 <script>
@@ -140,6 +183,15 @@ export default {
       form: {
         subject_name: "",
       },
+      form: {
+        fileExcel: "",
+      },
+      isGenerated: false,
+      linkDownload: "",
+      submitted: false,
+      submittedForm: false,
+      wrongFormat: false,
+
       submitted: false,
       updated: false,
     };
@@ -147,6 +199,7 @@ export default {
   validations: {
     form: {
       subject_name: { required },
+      fileExcel: { required },
     },
   },
   computed: {
@@ -164,8 +217,74 @@ export default {
     this.$store.dispatch("getSubject");
   },
   methods: {
-    handleCreatedDegree() {
+    downloadExcel(){
+      axios.get(`/api/excel/export/subject`, 
+       {responseType: 'arraybuffer'}).then(response => {
+          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', 'subject.xlsx');
+       document.body.appendChild(fileLink);
+       fileLink.click();
+       fileLink.close();
+      });
+    },
+    onRegister() {
+      console.log('executedd');
       this.submitted = true;
+      var vm = this;
+      // this.$v.$touch();
+      // if (this.$v.$invalid) {
+      //   return;
+      // }
+      let formData = new FormData();
+      formData.append("file", this.form.fileExcel);
+      axios
+        .post("/api/excel/import/subject", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(function() {
+          Vue.swal({
+            icon: "success",
+            title: "Bulk excel Berhasil!",
+          });
+          // this.$store.dispatch("getUploadedFile");
+
+          // vm.$store.dispatch("getUploadedFile");
+          // vm.$router.push("/editor-management");
+          // this.clearData();
+            vm.$store.dispatch("getSubject");
+          // console.log("SUCCESS!!");
+        })
+        .catch(function(error) {
+          Vue.swal({
+            icon: "error",
+            title: "Import excel Gagal!",
+            text:
+              "Mohon perhatikan kembali format excel atau jumlah data input harus lebih dari 5 data",
+          });
+          console.log(error);
+        });
+    },
+    handleUploadCard() {
+      if (this.$refs.file1.files.length != 0) {
+        this.form.fileExcel = this.$refs.file1.files[0];
+        var type = this.form.fileExcel.type;
+
+        if (
+          type ===
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+          this.wrongFormat = false;
+        else this.wrongFormat = true;
+      } else {
+        this.wrongFormat = false;
+      }
+    },
+    handleCreatedDegree() {
+      this.submittedForm = true;
       var vm = this;
       this.$v.$touch();
       if (this.$v.$invalid) {
@@ -174,18 +293,14 @@ export default {
       // console.log(this.form);
       let formData = new FormData();
       formData.append("subject_name", this.form.subject_name);
-      axios.post("/api/subject", formData).then((res) => 
-      {
+      axios.post("/api/subject", formData).then((res) => {
         // console.log(res.data);
-        if(res.data.status == "Success")
-        {
+        if (res.data.status == "Success") {
           Vue.swal({
             icon: "success",
             title: "Successfully Added!",
           });
-        }
-        else
-        {
+        } else {
           Vue.swal({
             icon: "error",
             title: "Failed to Add!",
@@ -238,32 +353,28 @@ export default {
       }
       let formData = new FormData();
       formData.append("subject_name", this.form.degree_name);
-      axios.put("/api/subject/" + this.id, this.form).then((res) => 
-      {
+      axios.put("/api/subject/" + this.id, this.form).then((res) => {
         // console.log(res);
-        if(res.data.status == "Success")
-        {
+        if (res.data.status == "Success") {
           Vue.swal({
             icon: "success",
             title: "Successfully Updated!",
           });
-        }
-        else
-        {
+        } else {
           Vue.swal({
             icon: "error",
             title: "Failed to Update!",
             text: "Data with same name already exist",
           });
         }
-        
+
         this.clearData();
         this.$store.dispatch("getSubject");
       });
     },
 
     clearData() {
-      this.submitted = false;
+      this.submittedForm = false;
       this.updated = false;
       this.form.subject_name = "";
       this.id = "";

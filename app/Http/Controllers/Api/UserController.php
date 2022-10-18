@@ -458,9 +458,9 @@ class UserController extends Controller
 
     public function import() 
     {
-        Excel::import(new UsersImport,request()->file('file'));
+        $is_success = Excel::import(new UsersImport,request()->file('file'));
              
-        return back();
+        return $is_success ? response()->json(['success' => true]) : response()->json(['success' => false]);
     }
 
     public function importEditor() 

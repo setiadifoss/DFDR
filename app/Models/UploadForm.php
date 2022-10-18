@@ -9,20 +9,22 @@ class UploadForm extends Model
 {
     use HasFactory;
     protected $table = 'upload_form';
-    protected $fillable = [
-      'title',
-      'category',
-      'description',
-      'publisher',
-      'date',
-      'language',
-      'relation',
-      'user_id',
-      'right_management',
-      'status',
-      'upload_for',
-      'total_download',
-    ];
+    protected $guarded = [];
+    // protected $fillable = [
+    //   'title',
+    //   'category',
+    //   'description',
+    //   'publisher',
+    //   'date',
+    //   'language',
+    //   'relation',
+    //   'user_id',
+    //   'right_management',
+    //   'status',
+    //   'upload_for',
+    //   'total_download',
+    //   'file',
+    // ];
 
     public function users()
     {
@@ -83,4 +85,27 @@ class UploadForm extends Model
     {
       return $this->hasMany(UploadFormFile::class);
     }
+
+    public function uploadFormLanguange()
+    {
+      return $this->belongsTo(Language::class, 'language');
+    }
+
+    public function getCategory($name)
+    {
+      $category = Category::where('category_name', 'like', '%' .$name . '%')->first();
+      return $category->id;
+    }
+
+    public function getCategoryById($id)
+    {
+      $category = Category::where('id', $id )->first();
+      return $category->category_name;
+    }
+  
+
+    // public function getLanguange(Type $var = null)
+    // {
+    //   # code...
+    // }
 }

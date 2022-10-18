@@ -12,8 +12,7 @@
             <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5">
               <b>ADDRESS</b>
             </h6>
-            <p class="mb-1">605, RATAN ICON BUILDING</p>
-            <p>SEAWOODS SECTOR</p>
+            <p class="mb-1" v-html="address"></p>
           </div>
         </div>
       </div>
@@ -30,6 +29,22 @@ import pdf from "vue-pdf";
 export default {
   components: {
     pdf,
+  },
+ 
+  data() {
+    return {
+      address: null,
+    }
+  },
+   created () {
+    this.getContact(1);
+  },
+  methods: {
+    getContact(contentId) {
+        axios.get("/api/template/contact/" + contentId).then((response) => {
+        this.address = response.data.data.content;
+      });
+    }
   },
 };
 </script>

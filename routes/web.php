@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+// Route::get('/pdf-view', function () {
+//     return view('pdfview');
+// });
+
 Route::get('/{slug1}', function () {
     return view('index');
 });

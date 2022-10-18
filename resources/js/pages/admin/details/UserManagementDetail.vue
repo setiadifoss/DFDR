@@ -398,7 +398,7 @@
                 type="button"
                 v-on:click.prevent="onUpdate()"
               >
-                Update
+                Update data
               </button>
               <div v-if="form.approved == 0">
                 <button
@@ -548,20 +548,20 @@ export default {
     },
 
     onUpdate() {
-      if (this.$v.$invalid)
-        return;
-      else if (!this.notify && this.form.password == undefined || !this.notify && this.form.password == '')
-      {
-        // console.log("noPass");
-        this.noPass = true;
-        return;
-      }
-      else if (!this.notify && this.form.passwordRe == undefined || !this.notify && this.form.passwordRe == '')
-      {
-        // console.log("noRePass");
-        this.noPassRe = true;
-        return;
-      }
+      // if (this.$v.$invalid)
+      //   return;
+      // else if (!this.notify && this.form.password == undefined || !this.notify && this.form.password == '')
+      // {
+      //   console.log("noPass");
+      //   this.noPass = true;
+      //   return;
+      // }
+      // else if (!this.notify && this.form.passwordRe == undefined || !this.notify && this.form.passwordRe == '')
+      // {
+      //   // console.log("noRePass");
+      //   this.noPassRe = true;
+      //   return;
+      // }
       
 
       let formData = new FormData();
@@ -625,21 +625,21 @@ export default {
     },
 
     handleApproval(id, val) {
-      var vm = this;
-      if (this.$v.$invalid)
-        return;
-      else if (!this.notify && this.form.password == undefined || !this.notify && this.form.password == '')
-      {
-        // console.log("noPass");
-        this.noPass = true;
-        return;
-      }
-      else if (!this.notify && this.form.passwordRe == undefined || !this.notify && this.form.passwordRe == '')
-      {
-        // console.log("noRePass");
-        this.noPassRe = true;
-        return;
-      }
+      // var vm = this;
+      // if (this.$v.$invalid)
+      //   return;
+      // else if (!this.notify && this.form.password == undefined || !this.notify && this.form.password == '')
+      // {
+      //   // console.log("noPass");
+      //   this.noPass = true;
+      //   return;
+      // }
+      // else if (!this.notify && this.form.passwordRe == undefined || !this.notify && this.form.passwordRe == '')
+      // {
+      //   // console.log("noRePass");
+      //   this.noPassRe = true;
+      //   return;
+      // }
 
       var data = { 
         approved: val, 

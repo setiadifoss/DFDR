@@ -386,17 +386,40 @@
                           </div>
                           <div class="col-md-12" v-if="v_creator">
                             <hr style="margin:8px; padding:0;">
-                            <ul style="list-style-type: circle" class="mt-2">
-                              <li v-for="(cat, c) in creators" :key="c">
-                                <p
+                             <div class="overflow-auto">
+                            
+
+    <p class="mt-3">Current Page: {{ currentPage }}</p>
+    <p class="mt-3">Total data: {{ creators.length }}</p>
+     <b-table
+      id="my-table"
+      :items="creators"
+      :per-page="perPage"
+      :current-page="currentPage"
+      small
+
+    >
+     <!-- A custom formatted column -->
+      <template #cell(creator)="data">
+          <p
                                   class="cat"
                                   style="cursor: pointer"
-                                  v-on:click.prevent="onCreatorSelected(cat.creator)"
+                                  v-on:click.prevent="onCreatorSelected(data.value)"
                                 >
-                                  {{ cat.creator }}
-                                </p>
-                              </li>
-                            </ul>
+                                {{ data.value}}
+          </p>
+      </template>
+    </b-table>
+     <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+      size="sm"
+    ></b-pagination>
+                             </div>
+
+                         
                           </div>    
                         </div>
                       </nav>
@@ -547,6 +570,10 @@ p {
 export default {
   data() {
     return {
+       perPage: 10,
+        currentPage: 1,
+        rows: 0,
+        jumlahData: null,
       v_collections: false,
       v_date: false,
       v_creator: false,
@@ -575,11 +602,16 @@ export default {
       return this.$store.getters.getAllCategories;
     },
     creators() {
+      this.rows = this.$store.getters.getAllCreator.length
       return this.$store.getters.getAllCreator;
     },
   },
+  created () {
+    // this.jumlahData = 'haloo'
+    //  this.rows = this.$store.getters.getAllCreator.length
+  },
   mounted() {
-    
+   
     
     if (this.$route.params.part == 'Search') 
     {

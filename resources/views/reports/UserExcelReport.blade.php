@@ -22,6 +22,7 @@
         <th>Faculty</th>
         <th>Year</th>
         <th>Role</th>
+        <th>Approved</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,6 +40,7 @@
         <td>{{$datas->faculty_name}}</td>
         <td>{{$datas->years}}</td>
         <td>{{$datas->role}}</td>
+        <td>{{$datas->approved == 1 ? 'Yes' : 'No'}}</td>
 			</tr>
       @endforeach
 		</tbody>

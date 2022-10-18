@@ -117,8 +117,7 @@
             <div>
               <h2>Submissions</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s :</p>
+              <p v-html="submissions.description"></p>
 
               <div class="row mt-4 mb-5">
                 <div class="col-md-3">
@@ -167,15 +166,7 @@
                 </div>
               </div>
               
-              <p>&nbsp; &nbsp; &nbsp; Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                It has roots in a piece of classical Latin literature from 45 BC, making 
-                it over 2000 years old. Please see our 
-                      <a class="cat"
-                        style="cursor: pointer;"
-                        v-on:click.prevent="onMenuClick('cont_guide')">Content Guideline</a>. 
-                Richard McClintock, 
-                a Latin professor at Hampden-Sydney College in Virginia, looked up one of 
-                the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
+           
 
             </div>
           </div>
@@ -183,11 +174,7 @@
             <div>
               <h2>Content Guideline</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                It has roots in a piece of classical Latin literature from 45 BC, making 
-                it over 2000 years old.</p>
+              <p>{{guidelane.description}}</p>
               <br>
               <div>
                 <nav class="navbar-light bg-light mb-2" 
@@ -197,16 +184,13 @@
                       <a class="navbar-brand title-text" 
                           v-on:click.prevent="cont_guide_1 = !cont_guide_1"
                           style="cursor: pointer; width:100%;">
-                        &nbsp; <i class="fa fa-caret-down"></i>&nbsp; What is Lorem Ipsum
+                        &nbsp; <i class="fa fa-caret-down"></i>&nbsp; What is 
                       </a>
                     </div>
                     <div class="col-md-12" v-if="cont_guide_1">
                       <hr style="margin:8px; padding:0;">
                       <p class="m-3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type 
-                        specimen book.</p>
+                     {{guidelane.what_is}}</p>
                     </div>    
                   </div>
                 </nav>
@@ -225,10 +209,7 @@
                     <div class="col-md-12" v-if="cont_guide_2">
                       <hr style="margin:8px; padding:0;">
                       <p class="m-3">
-                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, 
-                        looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum 
-                        passage, and going through the cites of the word in classical literature, 
-                        discovered the undoubtable source.</p>
+                       {{guidelane.where_does}}</p>
                     </div>    
                   </div>
                 </nav>
@@ -247,9 +228,7 @@
                     <div class="col-md-12" v-if="cont_guide_3">
                       <hr style="margin:8px; padding:0;">
                       <p class="m-3">
-                        The point of using Lorem Ipsum is that it has a more-or-less normal 
-                        distribution of letters, as opposed to using 'Content here, content here', 
-                        making it look like readable English.</p>
+                      {{guidelane.why_do_we_use_it}}</p>
                     </div>    
                   </div>
                 </nav>
@@ -259,37 +238,17 @@
           <div class="card-body p-content" v-if="thes_diss">
             <div>
               <h2>Thesis and Dissertation</h2>
-              <hr><br>
-              <ul class="list-group">
-                <li class="list-group-item text-center">
-                  <p style="font-size: 12px;">
-                    &nbsp; &nbsp; &nbsp; Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                    It has roots in a piece of classical Latin literature from 45 BC, making 
-                    it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College 
-                    in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem 
-                    Ipsum passage
-                  </p>
-                </li>
-              </ul>
-              <br>
-              <h5><i>What is Lorem Ipsum?</i></h5>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
-              been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-              a galley of type and scrambled it to make a type specimen book.</p>
+                <hr><br>
+             <p v-html="how_to_submit.thesis"></p>
+          
 
             </div>
           </div>
           <div class="card-body p-content" v-if="facu_work">
             <div>
-              <h2>Faculty and Staff Work</h2>
+                     <h2>Faculty & Staff work</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
-              been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-              a galley of type and scrambled it to make a type specimen book.It has survived not only five 
-              centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-              It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum 
-              passages, and more recently with desktop publishing software like Aldus PageMaker including 
-              versions of Lorem Ipsum.</p>
+            <p v-html="how_to_submit.faculty_work"></p>
 
             </div>
           </div>
@@ -297,13 +256,7 @@
             <div>
               <h2>Graduate Work (Non-thesis)</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
-              been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-              a galley of type and scrambled it to make a type specimen book.It has survived not only five 
-              centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-              It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum 
-              passages, and more recently with desktop publishing software like Aldus PageMaker including 
-              versions of Lorem Ipsum.</p>
+             <p v-html="how_to_submit.graduate_work"></p>
 
             </div>
           </div>
@@ -311,13 +264,7 @@
             <div>
               <h2>Undergraduate Work</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
-              been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-              a galley of type and scrambled it to make a type specimen book.It has survived not only five 
-              centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-              It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum 
-              passages, and more recently with desktop publishing software like Aldus PageMaker including 
-              versions of Lorem Ipsum.</p>
+             <p v-html="how_to_submit.undergrated_work"></p>
 
             </div>
           </div>
@@ -325,33 +272,7 @@
             <div>
               <h2>License</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s :</p>
-              <br>
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <p style="font-size: 12px;">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
-                    been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-                    a galley of type and scrambled it to make a type specimen book.It has survived not only five 
-                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum 
-                    passages, and more recently with desktop publishing software like Aldus PageMaker including 
-                    versions of Lorem Ipsum.<br><br>
-                    <ol>
-                      <li>Lorem Ipsum is not simply random text</li>
-                      <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
-                      <li>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</li>
-                    </ol>
-                  </p>
-                </li>
-              </ul>
-              <br>
-              <p>&nbsp; &nbsp; &nbsp; Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                It has roots in a piece of classical Latin literature from 45 BC, making 
-                it over 2000 years old. Please see our <a href="">Content Guideline</a>. Richard McClintock, 
-                a Latin professor at Hampden-Sydney College in Virginia, looked up one of 
-                the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
+           <p v-html="license_data"> </p>
 
             </div>
           </div>
@@ -359,20 +280,7 @@
             <div>
               <h2>User Guides</h2>
               <hr><br>
-              <p>&nbsp; &nbsp; &nbsp; Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s :</p><br>
-
-              <ol>
-                <li>Lorem Ipsum is not simply random text</li>
-                <li>Lorem Ipsum has been the industry's standard dummy text since the 1500s.</li>
-                <li>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</li>
-              </ol>
-              <br>
-              <p>&nbsp; &nbsp; &nbsp; Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                It has roots in a piece of classical Latin literature from 45 BC, making 
-                it over 2000 years old. Richard McClintock, 
-                a Latin professor at Hampden-Sydney College in Virginia, looked up one of 
-                the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
+            <p v-html="user_guide_data"></p>
 
             </div>
           </div>
@@ -387,7 +295,7 @@
 <style scoped>
 .card {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: .7rem !important;
+  border-radius: 0.7rem !important;
 }
 
 .p-content {
@@ -412,6 +320,22 @@ a {
 export default {
   data() {
     return {
+      submissions : {
+        description : '',
+      },
+      guidelane: {
+        description: null,
+        what_is: null,
+        where_does: null,
+        why_do_we_use_it: null,
+      },
+      how_to_submit: {
+        thesis: null,
+        faculty_work: null,
+        graduate_work: null,
+        undergrated_work: null,
+      },
+      license_data: null,
       loading: false,
       submission: true,
       cont_guide: false,
@@ -422,6 +346,7 @@ export default {
       ungrad_work: false,
       license: false,
       user_guide: false,
+      user_guide_data: null,
 
       cont_guide_1: true,
       cont_guide_2: false,
@@ -429,99 +354,188 @@ export default {
     };
   },
   components: {},
+  created() {
+    this.getDataGuideLane(1);
+    this.getDataGuideLane(2);
+    this.getDataGuideLane(3);
+    this.getDataGuideLane(4);
+    this.getDataHowSubmit(1);
+    this.getDataHowSubmit(2);
+    this.getDataHowSubmit(3);
+    this.getDataHowSubmit(4);
+    this.getLicense();
+    this.getUserGuide();
+    this.getSubmissionDescription();
+  },
   methods: {
+    getSubmissionDescription() {
+      // api/template/submission
+      axios.get('/api/template/submission')
+      .then(response => {
+        this.submissions.description = response.data.data.content;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    getUserGuide() {
+      axios.get('/api/template/user-guide')
+      .then(response => {
+        this.user_guide_data = response.data.data.content;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    getLicense() {
+      axios.get('/api/template/license/1')
+        .then(response => {
+          this.license_data = response.data.data.content;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getDataGuideLane(contentId) {
+      axios
+        .get(`/api/template/content-guidelane/${contentId}`)
+        .then((response) => {
+          switch (contentId) {
+            case 1:
+              this.guidelane.description = response.data.data.content;
+              break;
+
+            case 2:
+              this.guidelane.what_is = response.data.data.content;
+              break;
+
+            case 3:
+              this.guidelane.where_does = response.data.data.content;
+
+              break;
+
+            default:
+              this.guidelane.why_do_we_use_it = response.data.data.content;
+
+              break;
+          }
+        });
+    },
+    getDataHowSubmit(contentId) {
+      axios.get(`/api/template/how-submit/${contentId}`).then((response) => {
+        switch (contentId) {
+          case 1:
+            this.how_to_submit.thesis = response.data.data.content;
+            break;
+
+          case 2:
+            this.how_to_submit.faculty_work = response.data.data.content;
+            break;
+
+          case 3:
+            this.how_to_submit.graduate_work = response.data.data.content;
+
+            break;
+
+          default:
+            this.how_to_submit.undergrated_work = response.data.data.content;
+
+            break;
+        }
+      });
+    },
     onMenuClick(mode) {
       this.loading = true;
       switch (mode) {
-        case 'submission':
-          this.submission = true
-          this.cont_guide = false
-          this.thes_diss = false
-          this.facu_work = false
-          this.grad_work = false
-          this.ungrad_work = false
-          this.license = false
-          this.user_guide = false
+        case "submission":
+          this.submission = true;
+          this.cont_guide = false;
+          this.thes_diss = false;
+          this.facu_work = false;
+          this.grad_work = false;
+          this.ungrad_work = false;
+          this.license = false;
+          this.user_guide = false;
           break;
 
-        case 'cont_guide':
-          this.submission = false
-          this.cont_guide = true
-          this.thes_diss = false
-          this.facu_work = false
-          this.grad_work = false
-          this.ungrad_work = false
-          this.license = false
-          this.user_guide = false
+        case "cont_guide":
+          this.submission = false;
+          this.cont_guide = true;
+          this.thes_diss = false;
+          this.facu_work = false;
+          this.grad_work = false;
+          this.ungrad_work = false;
+          this.license = false;
+          this.user_guide = false;
           break;
 
-        case 'thes_diss':
-          this.submission = false
-          this.cont_guide = false
-          this.thes_diss = true
-          this.facu_work = false
-          this.grad_work = false
-          this.ungrad_work = false
-          this.license = false
-          this.user_guide = false
+        case "thes_diss":
+          this.submission = false;
+          this.cont_guide = false;
+          this.thes_diss = true;
+          this.facu_work = false;
+          this.grad_work = false;
+          this.ungrad_work = false;
+          this.license = false;
+          this.user_guide = false;
           break;
 
-        case 'facu_work':
-          this.submission = false
-          this.cont_guide = false
-          this.thes_diss = false
-          this.facu_work = true
-          this.grad_work = false
-          this.ungrad_work = false
-          this.license = false
-          this.user_guide = false
-          break;
-        
-        case 'grad_work':
-          this.submission = false
-          this.cont_guide = false
-          this.thes_diss = false
-          this.facu_work = false
-          this.grad_work = true
-          this.ungrad_work = false
-          this.license = false
-          this.user_guide = false
+        case "facu_work":
+          this.submission = false;
+          this.cont_guide = false;
+          this.thes_diss = false;
+          this.facu_work = true;
+          this.grad_work = false;
+          this.ungrad_work = false;
+          this.license = false;
+          this.user_guide = false;
           break;
 
-        case 'ungrad_work':
-          this.submission = false
-          this.cont_guide = false
-          this.thes_diss = false
-          this.facu_work = false
-          this.grad_work = false
-          this.ungrad_work = true
-          this.license = false
-          this.user_guide = false
+        case "grad_work":
+          this.submission = false;
+          this.cont_guide = false;
+          this.thes_diss = false;
+          this.facu_work = false;
+          this.grad_work = true;
+          this.ungrad_work = false;
+          this.license = false;
+          this.user_guide = false;
           break;
 
-        case 'license':
-          this.submission = false
-          this.cont_guide = false
-          this.thes_diss = false
-          this.facu_work = false
-          this.grad_work = false
-          this.ungrad_work = false
-          this.license = true
-          this.user_guide = false
+        case "ungrad_work":
+          this.submission = false;
+          this.cont_guide = false;
+          this.thes_diss = false;
+          this.facu_work = false;
+          this.grad_work = false;
+          this.ungrad_work = true;
+          this.license = false;
+          this.user_guide = false;
           break;
 
-        case 'user_guide':
-          this.submission = false
-          this.cont_guide = false
-          this.thes_diss = false
-          this.facu_work = false
-          this.grad_work = false
-          this.ungrad_work = false
-          this.license = false
-          this.user_guide = true
+        case "license":
+          this.submission = false;
+          this.cont_guide = false;
+          this.thes_diss = false;
+          this.facu_work = false;
+          this.grad_work = false;
+          this.ungrad_work = false;
+          this.license = true;
+          this.user_guide = false;
+          break;
+
+        case "user_guide":
+          this.submission = false;
+          this.cont_guide = false;
+          this.thes_diss = false;
+          this.facu_work = false;
+          this.grad_work = false;
+          this.ungrad_work = false;
+          this.license = false;
+          this.user_guide = true;
           break;
       }
-      setTimeout(() => this.loading = false, 300);
+      setTimeout(() => (this.loading = false), 300);
     },
   },
 };

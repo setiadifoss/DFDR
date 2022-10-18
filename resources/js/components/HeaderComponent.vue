@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="jumbotron bg-blue">
-      <p class="logo-campus-text">FRAMEWORK <strong>DIGITAL REPOSITORY</strong></p>
+      <p class="logo-campus-text" v-html="header"></p>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-grey">
       <button
@@ -58,3 +58,24 @@
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'HeaderComponent',
+  data() {
+    return {
+      header: null,
+    };
+  },
+  methods: {
+    getHeader() {
+      axios.get('/api/template/home/1').then(response => {
+        this.header = response.data.data.content;
+      });
+    }
+  },
+  created () {
+    this.getHeader();
+  },
+}
+</script>

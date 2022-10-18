@@ -9,6 +9,8 @@ import AdminCreateLayout from "../layouts/AdminCreateLayout.vue";
 import Homepage from "../pages/Homepage.vue";
 import DescSubmission from "../pages/DescSubmission.vue";
 import Login from "../pages/Login.vue";
+import PdfViewNew from "../pages/PdfView.vue";
+import PdfViewOld from "../pages/PdfViewOld.vue";
 import ForgotPassword from "../pages/Loginforget.vue";
 import ResetPassword from "../pages/LoginReset.vue";
 import AllSubmissions from "../pages/SubmissionAll.vue";
@@ -57,12 +59,20 @@ import UserProfile from "../pages/UserProfile.vue";
 import BulkUser from "../pages/admin/BulkUser.vue";
 import BulkEditor from "../pages/admin/BulkEditor.vue";
 import ReportPdf from "../pages/admin/ReportPdf.vue";
+import ViewJson from "../pages/admin/JsonViewer.vue";
+// add by mw
+import TemplateHome from "../pages/admin/template/Home.vue"
+import TemplateSubmission from "../pages/admin/template/Submission.vue"
+import TemplateAbout from "../pages/admin/template/About.vue"
+import TemplateContact from "../pages/admin/template/Contact.vue"
+import TemplateSlider from "../pages/admin/template/Slider.vue"
+import TemplateFooterImage from "../pages/admin/template/FooterImage.vue"
 
 const routes = [{
         path: "",
         component: HomeLayout,
         children: [{
-                path: "",
+                path: "/",
                 component: Homepage,
                 name: "Homepage",
             },
@@ -70,6 +80,16 @@ const routes = [{
                 path: "/home",
                 component: Homepage,
                 name: "Homepage",
+            },
+            {
+                path: "/view/:id",
+                component: PdfViewOld,
+                name: "PdfView",
+            },
+            {
+                path: "/fullview/:id",
+                component: PdfViewNew,
+                name: "PdfViewNew",
             },
             {
                 path: "/submissions",
@@ -349,12 +369,52 @@ const routes = [{
                 component: ReportPdf,
                 name: "ReportPdf",
             },
+
+            // add by mw
+            // home
+            {
+                path: "/template/home",
+                component: TemplateHome,
+                name: "TemplateHome",
+            },
+            {
+                path: "/template/submission",
+                component: TemplateSubmission,
+                name: "TemplateSubmission",
+            },
+            {
+                path: "/template/about",
+                component: TemplateAbout,
+                name: "TemplateAbout",
+            },
+            {
+                path: "/template/contact",
+                component: TemplateContact,
+                name: "TemplateContact",
+            },
+            {
+                path: "/template/slider",
+                component: TemplateSlider,
+                name: "TemplateSlider",
+            },
+            {
+                path: "/template/footer-image",
+                component: TemplateFooterImage,
+                name: "TemplateFooterImage",
+            },
+           
         ],
     },
     {
         path: "/adm-config",
         component: AdminCreateLayout,
     }
+    ,
+    {
+        path: "/view-json-deposit/:id",
+        component: ViewJson,
+        name: "ViewJson",
+    },
 ];
 
 const router = new VueRouter({

@@ -208,6 +208,48 @@
         </div>
       </li>
 
+ <!-- User Management -->
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-toggle="collapse"
+          data-target="#collapsethreeweb"
+          aria-expanded="true"
+          aria-controls="collapsethreeweb"
+        >
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Web Management</span>
+        </a>
+        <div
+          id="collapsethreeweb"
+          class="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionSidebar"
+        >
+          <div class="bg-white py-2 collapse-inner rounded">
+              <router-link :to="{ name: 'TemplateSlider' }" class="collapse-item"
+              >Slider</router-link
+            >
+              <router-link :to="{ name: 'TemplateFooterImage' }" class="collapse-item"
+              >Footer image</router-link
+            >
+            <router-link :to="{ name: 'TemplateHome' }" class="collapse-item"
+              >Home</router-link
+            >
+            <router-link :to="{ name: 'TemplateSubmission' }" class="collapse-item"
+              >Submission</router-link
+            >
+            <router-link :to="{ name: 'TemplateAbout' }" class="collapse-item"
+              >About us</router-link
+            >
+
+              <router-link :to="{ name: 'TemplateContact' }" class="collapse-item"
+              >Contact</router-link
+            >
+          </div>
+        </div>
+      </li>
       <!-- Editor Management -->
       <li class="nav-item">
         <a

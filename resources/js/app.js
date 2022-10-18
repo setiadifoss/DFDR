@@ -13,6 +13,9 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import store from "./store";
 import Vue2Editor from "vue2-editor";
+import VueYouTubeEmbed from 'vue-youtube-embed'
+
+Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" })
 
 
 Vue.use(Vue2Editor);
@@ -22,6 +25,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(Vuelidate);
 Vue.use(VueSweetalert2);
+
 
 Vue.component(
     "example-component",

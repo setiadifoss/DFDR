@@ -6,6 +6,16 @@
         <form>
           <div class="row">
             <div class="col-md-6">
+    <div class="mt-2 mb-2">
+      <p>Report name</p>
+     <input
+                            format="text"
+                            class="form-control"
+                            v-model="report_name"
+                            placeholder="Enter name.."
+                          
+                          />
+    </div>
               <div class="form-group">
                 <label for="">Filter By</label>
                 <select
@@ -24,6 +34,7 @@
                 </select>
               </div>
             </div>
+            
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Sort By</label>
@@ -137,7 +148,9 @@
                 </select>
               </div>
             </div>
+             
           </div>
+
 
           <div class="row">
             <div class="col-md-12">
@@ -205,6 +218,7 @@ import { required, } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
+      report_name: "",
       form: {
         start_date: "",
         end_date: this.currentDate(),
@@ -302,6 +316,7 @@ export default {
           };
           break;
       }
+      data.report_name = this.report_name
 
       // var today = this.currentDate();
 
@@ -349,18 +364,22 @@ export default {
           {
             // console.log(response.data.data);            
 
-            var head = "<title>Generated JSON</title>";
-            var ex_head = "<head>"+
-                          "\x3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'>\x3C/script>"+
-                          "\x3Cscript src='https://rawgit.com/abodelot/jquery.json-viewer/master/json-viewer/jquery.json-viewer.js'>\x3C/script>"+
-                          "<link href='https://rawgit.com/abodelot/jquery.json-viewer/master/json-viewer/jquery.json-viewer.css' rel='stylesheet'/>"+
-                          "</head>";
-            var cont = "<body style='font-family:Lucida Console; font-size:13px; width:70%;'>"+
-                        "\x3Cscript>$(function(){$('#json-renderer').jsonViewer("+ response.data.data +");});\x3C/script>"+
-                       "<code id='json-renderer'>"+ 
-                       "</code></body>";
-
-            var tab = window.open('about:blank', '_blank');
+            // var head = "<title>Generated JSON</title>";
+            // var ex_head = "<head>"+
+            //               "\x3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'>\x3C/script>"+
+            //               "\x3Cscript src='https://rawgit.com/abodelot/jquery.json-viewer/master/json-viewer/jquery.json-viewer.js'>\x3C/script>"+
+            //               "<link href='https://rawgit.com/abodelot/jquery.json-viewer/master/json-viewer/jquery.json-viewer.css' rel='stylesheet'/>"+
+            //               "</head>";
+            // var cont = "<body style='font-family:Lucida Console; font-size:13px; width:70%;'>"+
+            //             "\x3Cscript>$(function(){$('#json-renderer').jsonViewer("+ response.data.data +");});\x3C/script>"+
+            //            "<code id='json-renderer'>"+ 
+            //            "</code></body>";
+let route = this.$router.resolve({name: 'ViewJson', params: {id: response.data.id}});
+let payload = {id: response.data.id , data : response.data.data}
+// this.$store.dispatch('getJson', payload);
+// let route = this.$router.resolve({name: 'routeName', query: {data: "someData"}});
+window.open(route.href, '_blank');
+            // var tab = window.open('about:blank', '_blank');
             tab.document.write(head + ex_head +''+ cont);
             tab.document.close();
 
