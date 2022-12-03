@@ -256,7 +256,7 @@
         <div class="col-md-3 mt-2">
           <div class="card p-1">
             <div class="card-body">
-              <h4 class="text-center">What Is <b v-html="title">?</b></h4>
+              <h4 class="text-center">Whats Is <b v-html="title">?</b></h4>
               <p class="text-justify mt-2" v-html="description">
                 &nbsp;&nbsp;&nbsp;&nbsp;<b v-html="title"></b>
               </p>
@@ -336,7 +336,7 @@ export default {
   data() {
     return {
       showVideo: false,
-      isInstalled : false,
+      isInstalled: false,
       videoId: null,
       images: [],
       news: [],
@@ -422,25 +422,22 @@ export default {
 
     preUsed() {
       // var val;
-      
-      axios.get("/api/preUsed")
-      .then((res) => {
-        
+
+      axios.get("/api/preUsed").then((res) => {
         console.log(res.data.data);
         this.install = res.data.data.file;
 
         if (!this.install) {
-          window.location.href = '/install';
+          window.location.href = "/install";
           // this.$router.push("/install");
         }
       });
-      
+
       // return val;
     },
 
-     preAdmin() {
-      axios.get("/api/preAdmin")
-      .then((res) => {
+    preAdmin() {
+      axios.get("/api/preAdmin").then((res) => {
         // console.log(res.data.data);
         var count = res.data.data.data;
 
