@@ -1,12 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;
 
-/*!
- * Bootstrap v4.6.0 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+400;500;700&display=swap);
+@charset "UTF-8";
 
 :root {
   --blue: #3490dc;
@@ -10990,6 +10985,11 @@ a.text-dark:focus {
 .bg-grey {
   background-color: #96bb7c;
   color: #002145;
+}
+
+.bg-header {
+  background-color: #2f4540;
+  color: white;
 }
 
 .header {

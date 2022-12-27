@@ -2,538 +2,338 @@
   <div class="container-fluid mt-4 mb-4">
     <div class="row justify-content-center">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="card p-4">
-          <div class="card-body">
-            <h4>All <b> Collections</b></h4>
-            <form v-on:submit.prevent="onSearch()">
-              <div class="row">
-                <div class="col-md-10">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control form-control-lg"
-                      id="search"
-                      v-model="form.search_key"
-                      placeholder="Search Title Submission ..."
-                    />
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block bg-blue btn-lg"
-                    v-on:click.prevent="onSearch()"
-                  >
-                    <i class="fa fa-search"></i>
-                    <!-- <span class="material-icons">search</span> -->
-                  </button>
-                </div>
+        <h4
+          class="d-flex justify-content-center text-dark font-weight-bold mb-1"
+        >
+          All Collections
+        </h4>
+        <p class="mb-3 d-flex justify-content-center">All Title Submissions</p>
+        <form
+          class="d-flex justify-content-center mb-5"
+          v-on:submit.prevent="onSearch()"
+        >
+          <div class="search-box">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="search"
+              v-model="form.search_key"
+              placeholder="Search Title Submission .."
+            />
+            <button
+              type="submit"
+              class="btn btn-primary btn-block bg-blue btn-md"
+              v-on:click.prevent="onSearch()"
+            >
+              <p>Search</p>
+            </button>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-3 filter-container">
+            <div
+              style="border-bottom: 1px solid #e4e4e4; height: 30px"
+              class="row d-flex justify-content-between mb-3 px-3"
+            >
+              <p class="font-weight-bold">Filter by</p>
+              <small style="cursor: pointer" @click="clearFilter()"
+                >Reset Filters</small
+              >
+            </div>
+            <div class="p-3">
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_sort = !v_sort"
+              >
+                <p class="mb-3 font-weight-bold">Sort</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_sort"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_sort"></i>
               </div>
-            </form>
-            <div class="row">
-              <div class="col-md-7 col-sm-7 col-xs-7">
-                <p>Submission found : {{ submissionCounting }} items</p>
+              <div v-show="v_sort" class="form-check mb-2">
+                <input
+                  @input="onSorting($event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="ASC"
+                  value="ASC"
+                  @click="sort = true"
+                  :checked="sort"
+                  id="flexRadioDefault1"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  A - Z
+                </label>
               </div>
-              <div class="col-md-3 col-sm-3 col-xs-3">
+              <div v-show="v_sort" class="form-check mb-3">
+                <input
+                  @input="onSorting($event)"
+                  @click="sort = false"
+                  class="form-check-input"
+                  type="radio"
+                  name="DESC"
+                  value="DESC"
+                  :checked="!sort"
+                  id="flexRadioDefault2"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Z - A
+                </label>
+              </div>
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_date = !v_date"
+              >
+                <p class="mb-3 font-weight-bold">Date Range</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_date"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_date"></i>
+              </div>
+              <div v-show="v_date" class="p-3 mb-4">
+                <div class="form-group mb-1">
+                  <input
+                    type="date"
+                    name=""
+                    id=""
+                    v-model="form.start_date"
+                    class="form-control font-date"
+                  />
+                </div>
+                <p class="font-weight-bold text-center mb-1">to</p>
                 <div class="form-group">
-                  <select
-                    class="form-control form-control-sm"
-                    id="department"
-                    aria-describedby="departmentError"
-                    v-on:change="onSorting($event)"
-                  >
-                    <option value="ASC">Sort By A - Z</option>
-                    <option value="DESC">Sort By Z - A</option>
-                  </select>
-                  <small
-                    id="departmentError"
-                    class="form-text text-muted"
-                    v-if="submitted && !$v.form.department.required"
-                    >Harap pilih salah satu departemen</small
-                  >
+                  <input
+                    type="date"
+                    name=""
+                    id=""
+                    v-model="form.end_date"
+                    class="form-control"
+                  />
                 </div>
+                <button
+                  class="btn apply-btn btn-sm btn-block font-weight-bold"
+                  v-on:click.prevent="onDateRange()"
+                >
+                  Apply
+                </button>
+              </div>
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_option = !v_option"
+              >
+                <p class="mb-3 font-weight-bold">Options</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_option"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_option"></i>
+              </div>
+              <div v-show="v_option" class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="ASC"
+                  value="ASC"
+                  @input="onOptionSelected('Open')"
+                  @click="options = true"
+                  :checked="options"
+                  id="flexRadioDefault1"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Open
+                </label>
+              </div>
+              <div v-show="v_option" class="form-check mb-3">
+                <input
+                  @input="onOptionSelected('Close')"
+                  @click="options = false"
+                  class="form-check-input"
+                  type="radio"
+                  name="Open"
+                  :checked="!options"
+                  id="flexRadioDefault2"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Close
+                </label>
+              </div>
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_collections = !v_collections"
+              >
+                <p class="mb-3 font-weight-bold">Collections</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_collections"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_collections"></i>
+              </div>
+              <div
+                v-show="v_collections"
+                class="form-check mb-1"
+                v-for="(cat, index) in categories"
+                :key="index"
+              >
+                <input
+                  @input="onCategorySelect(cat.id, cat.category_name)"
+                  class="form-check-input"
+                  @click="selectedCategory = cat.id"
+                  type="radio"
+                  :checked="cat.id === selectedCategory"
+                  id="flexRadioDefault2"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  {{ cat.category_name }}
+                </label>
+              </div>
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_creator = !v_creator"
+              >
+                <p class="mb-3 font-weight-bold">Creators</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_creator"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_creator"></i>
+              </div>
+              <div
+                v-show="v_creator"
+                class="form-check mb-1"
+                v-for="(item, index) in creators"
+                :key="index"
+              >
+                <input
+                  @input="onCreatorSelected(item.value)"
+                  class="form-check-input"
+                  @click="selectedCreator = item.value"
+                  type="radio"
+                  :checked="item.value === selectedCreator"
+                  id="flexRadioDefault2"
+                />
+                <label
+                  style="cursor: pointer"
+                  class="form-check-label"
+                  for="flexRadioDefault2"
+                >
+                  {{ item.value }}
+                </label>
+              </div>
+              <p v-show="v_creator" class="mt-3">
+                Total data: {{ creators.length }}
+              </p>
+              <b-pagination
+                v-show="v_creator"
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
+                size="sm"
+              ></b-pagination>
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_subject = !v_subject"
+              >
+                <p class="mb-3 font-weight-bold">Subject</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_subject"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_subject"></i>
+              </div>
+              <div
+                v-show="v_subject"
+                class="form-check mb-1"
+                v-for="(sub, index) in subject"
+                :key="index"
+              >
+                <input
+                  @input="onSubjectClicked(sub.subject)"
+                  class="form-check-input"
+                  @click="selectedSubject = sub.subject"
+                  type="radio"
+                  :checked="sub.subject === selectedSubject"
+                  id="flexRadioDefault2"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  {{ sub.subject }}
+                </label>
+              </div>
+              <div
+                class="d-flex justify-content-between"
+                style="cursor: pointer"
+                @click="v_type = !v_type"
+              >
+                <p class="mb-3 font-weight-bold">Type</p>
+                <i class="fa fa-chevron-down pt-1" v-if="!v_type"></i>
+                <i class="fa fa-chevron-up pt-1" v-if="v_type"></i>
+              </div>
+              <div
+                v-show="v_type"
+                class="form-check mb-1"
+                v-for="(item, index) in type"
+                :key="index"
+              >
+                <input
+                  @input="onTypeSelected(item.type)"
+                  class="form-check-input"
+                  @click="selectedType = item.type"
+                  type="radio"
+                  :checked="item.type === selectedType"
+                  id="flexRadioDefault2"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  {{ item.type }}
+                </label>
               </div>
             </div>
-
-            <!-- type 1 -->
-            <!-- <div class="row mt-4">
-              <div class="col-md-4">
-                <div>
-                  <h5>Collections:</h5>
-                  <ul style="list-style-type: circle" class="mt-2">
-                    <li v-for="(cat, c) in categories" :key="c">
-                      <p
-                        class="cat"
-                        style="cursor: pointer"
-                        v-on:click.prevent="
-                          onCategorySelect(cat.id, cat.category_name)
-                        "
-                      >
-                        {{ cat.category_name }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div>
-                  <h5>Date Range</h5>
-                  <form>
-                    <div class="row mt-2">
-                      <div class="col">
-                        <div class="form-group">
-                          <input
-                            type="date"
-                            name=""
-                            id=""
-                            v-model="form.start_date"
-                            class="form-control font-date"
-                          />
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group">
-                          <input
-                            type="date"
-                            name=""
-                            id=""
-                            v-model="form.end_date"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <button
-                          class="btn btn-primary btn-sm btn-block"
-                          v-on:click.prevent="onDateRange()"
-                        >
-                          Apply
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div>
-                  <h5>Type :</h5>
-                  <ul style="list-style-type: circle" class="mt-2">
-                    <li v-for="(typ, t) in type" :key="t">
-                      <p
-                        class="cat"
-                        style="cursor: pointer"
-                        v-on:click.prevent="onTypeSelected(typ.type)"
-                      >
-                        {{ typ.type }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <hr />
-                <div>
-                  <h5>Subject :</h5>
-                  <ul style="list-style-type: circle" class="mt-2">
-                    <li v-for="(sub, c) in subject" :key="c">
-                      <p
-                        class="cat"
-                        style="cursor: pointer"
-                        v-on:click.prevent="onSubjectClicked(sub.subject)"
-                      >
-                        {{ sub.subject }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- type 2 -->
-            <!-- <div class="row mt-4">
-              <div class="col-md-4">
-                <div>
-                  <h5>Collections:</h5>
-                  <ul style="list-style-type: circle" class="mt-2">
-                    <li v-for="(cat, c) in categories" :key="c">
-                      <p
-                        class="cat"
-                        style="cursor: pointer"
-                        v-on:click.prevent="
-                          onCategorySelect(cat.id, cat.category_name)
-                        "
-                      >
-                        {{ cat.category_name }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div>
-                  <h5>Date Range</h5>
-                  <form>
-                    <div class="row mt-2">
-                      <div class="col">
-                        <div class="form-group">
-                          <input
-                            type="date"
-                            name=""
-                            id=""
-                            v-model="form.start_date"
-                            class="form-control font-date"
-                          />
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group">
-                          <input
-                            type="date"
-                            name=""
-                            id=""
-                            v-model="form.end_date"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <button
-                          class="btn btn-primary btn-sm btn-block"
-                          v-on:click.prevent="onDateRange()"
-                        >
-                          Apply
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div>
-                  <h5>Type :</h5>
-                  <ul style="list-style-type: circle" class="mt-2">
-                    <li v-for="(typ, t) in type" :key="t">
-                      <p
-                        class="cat"
-                        style="cursor: pointer"
-                        v-on:click.prevent="onTypeSelected(typ.type)"
-                      >
-                        {{ typ.type }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <hr />
-                <div>
-                  <h5>Subject :</h5>
-                  <ul style="list-style-type: circle" class="mt-2">
-                    <li v-for="(sub, c) in subject" :key="c">
-                      <p
-                        class="cat"
-                        style="cursor: pointer"
-                        v-on:click.prevent="onSubjectClicked(sub.subject)"
-                      >
-                        {{ sub.subject }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div> -->
-
           </div>
-        </div>
-        
-        <div>
-          <div>
-            <div class="row mt-4">
-              <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="card">
-                  <div class="card-body p-4">
-                    <h4 class="text-center mb-4">Filter Result</h4>
-                    <div>
-                      <nav class="navbar-light bg-light mb-2" 
-                           style="padding-left:15px; padding-right:15px; padding-top:5px;">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <a class="navbar-brand title-text" 
-                               v-on:click.prevent="v_option = !v_option"
-                               style="cursor: pointer; width:100%;">
-                              &nbsp; <i class="fa fa-caret-down"></i>&nbsp; Options
-                            </a>
-                          </div>
-                          <div class="col-md-12" v-if="v_option">
-                            <hr style="margin:8px; padding:0;">
-                            <ul style="list-style-type: circle" class="mt-2">
-                              <li>
-                                <p
-                                  class="cat"
-                                  style="cursor: pointer"
-                                  v-on:click.prevent="onOptionSelected('Open')"
-                                >
-                                  Open
-                                </p>
-                              </li>
-                              <li>
-                                <p
-                                  class="cat"
-                                  style="cursor: pointer"
-                                  v-on:click.prevent="onOptionSelected('Close')"
-                                >
-                                  Close
-                                </p>
-                              </li>
-                            </ul>
-                          </div>    
-                        </div>
-                      </nav>
-                    </div>
-                    <div>
-                      <nav class="navbar-light bg-light mb-2" 
-                           style="padding-left:15px; padding-right:15px; padding-top:5px;">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <a class="navbar-brand title-text" 
-                               v-on:click.prevent="v_collections = !v_collections"
-                               style="cursor: pointer; width:100%;">
-                              &nbsp; <i class="fa fa-caret-down"></i>&nbsp; Collections
-                            </a>
-                          </div>
-                          <div class="col-md-12" v-if="v_collections">
-                            <hr style="margin:8px; padding:0;">
-                            <ul style="list-style-type: circle" class="mt-2">
-                              <li v-for="(cat, c) in categories" :key="c">
-                                <p
-                                  class="cat"
-                                  style="cursor: pointer"
-                                  v-on:click.prevent="onCategorySelect(cat.id, cat.category_name)"
-                                >
-                                  {{ cat.category_name }}
-                                </p>
-                              </li>
-                            </ul>
-                          </div>    
-                        </div>
-                      </nav>
-                    </div>
-                    <div>
-                      <nav class="navbar-light bg-light mb-2"
-                           style="padding-left:15px; padding-right:15px; padding-top:5px;">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <a class="navbar-brand title-text" 
-                               v-on:click.prevent="v_date = !v_date"
-                               style="cursor: pointer; width:100%;">
-                              &nbsp; <i class="fa fa-caret-down"></i>&nbsp; Date Range
-                            </a>
-                          </div>
-                          <div class="col-md-12 mb-4" v-if="v_date">
-                            <hr style="margin:8px; padding:0;">
-                            <form>
-                              <div class="row mt-3">
-                                <div class="col">
-                                  <div class="form-group">
-                                    <!-- <label for="">Start Date</label> -->
-                                    <input
-                                      type="date"
-                                      name=""
-                                      id=""
-                                      v-model="form.start_date"
-                                      class="form-control font-date"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="col">
-                                  <div class="form-group">
-                                    <!-- <label for="">End Date</label> -->
-                                    <input
-                                      type="date"
-                                      name=""
-                                      id=""
-                                      v-model="form.end_date"
-                                      class="form-control"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <button
-                                    class="btn btn-primary btn-sm btn-block"
-                                    v-on:click.prevent="onDateRange()"
-                                  >
-                                    Apply
-                                  </button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>    
-                        </div>
-                      </nav>
-                    </div>
-                    <div>
-                      <nav class="navbar-light bg-light mb-2" 
-                           style="padding-left:15px; padding-right:15px; padding-top:5px;">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <a class="navbar-brand title-text" 
-                               v-on:click.prevent="v_creator = !v_creator"
-                               style="cursor: pointer; width:100%;">
-                              &nbsp; <i class="fa fa-caret-down"></i>&nbsp; Creators
-                            </a>
-                          </div>
-                          <div class="col-md-12" v-if="v_creator">
-                            <hr style="margin:8px; padding:0;">
-                             <div class="overflow-auto">
-                            
-
-    <p class="mt-3">Current Page: {{ currentPage }}</p>
-    <p class="mt-3">Total data: {{ creators.length }}</p>
-     <b-table
-      id="my-table"
-      :items="creators"
-      :per-page="perPage"
-      :current-page="currentPage"
-      small
-
-    >
-     <!-- A custom formatted column -->
-      <template #cell(creator)="data">
-          <p
-                                  class="cat"
-                                  style="cursor: pointer"
-                                  v-on:click.prevent="onCreatorSelected(data.value)"
-                                >
-                                {{ data.value}}
-          </p>
-      </template>
-    </b-table>
-     <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="my-table"
-      size="sm"
-    ></b-pagination>
-                             </div>
-
-                         
-                          </div>    
-                        </div>
-                      </nav>
-                    </div>
-                    <div>
-                      <nav class="navbar-light bg-light mb-2" 
-                           style="padding-left:15px; padding-right:15px; padding-top:5px;">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <a class="navbar-brand title-text" 
-                               v-on:click.prevent="v_subject = !v_subject"
-                               style="cursor: pointer; width:100%;">
-                              &nbsp; <i class="fa fa-caret-down"></i>&nbsp; Subject
-                            </a>
-                          </div>
-                          <div class="col-md-12" v-if="v_subject">
-                            <hr style="margin:8px; padding:0;">
-                            <ul style="list-style-type: circle" class="mt-2">
-                              <li v-for="(sub, c) in subject" :key="c">
-                                <p
-                                  class="cat"
-                                  style="cursor: pointer"
-                                  v-on:click.prevent="onSubjectClicked(sub.subject)"
-                                >
-                                  {{ sub.subject }}
-                                </p>
-                              </li>
-                            </ul>
-                          </div>    
-                        </div>
-                      </nav>
-                    </div>
-                    <div>
-                      <nav class="navbar-light bg-light mb-2" 
-                           style="padding-left:15px; padding-right:15px; padding-top:5px;">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <a class="navbar-brand title-text" 
-                               v-on:click.prevent="v_type = !v_type"
-                               style="cursor: pointer; width:100%;">
-                              &nbsp; <i class="fa fa-caret-down"></i>&nbsp; Type
-                            </a>
-                          </div>
-                          <div class="col-md-12" v-if="v_type">
-                            <hr style="margin:8px; padding:0;">
-                            <ul style="list-style-type: circle" class="mt-2">
-                              <li v-for="(typ, t) in type" :key="t">
-                                <p
-                                  class="cat"
-                                  style="cursor: pointer"
-                                  v-on:click.prevent="onTypeSelected(typ.type)"
-                                >
-                                  {{ typ.type }}
-                                </p>
-                              </li>
-                            </ul>
-                          </div>    
-                        </div>
-                      </nav>
-                    </div>
-                    
-                  </div>
-                </div>
+          <div class="col-1"></div>
+          <div class="col result-container">
+            <b style="color: #184d47"
+              >Submission found : {{ submissionCounting }} items</b
+            >
+            <div
+              class="d-flex justify-content-center font-weight-bold"
+              style="color: #2f3542"
+              v-show="submissions.length == 0"
+            >
+              Submission not found
+            </div>
+            <div class="d-flex justify-content-center" v-if="loading">
+              <loading-component></loading-component>
+            </div>
+            <div
+              class="submission-item row"
+              v-for="(sub, s) in submissions"
+              :key="s"
+            >
+              <div class="col-2">
+                <img
+                  class="img-fluid mb-2 float-left"
+                  src="/admin-template/img/logo.png"
+                  width="120"
+                  style="margin-right: 5px"
+                />
               </div>
-
-              <div class="col-md-8 text-center mt-4" v-if="loading">
-                <loading-component></loading-component>
-              </div>
-              <div class="col-md-8 col-sm-12 col-xs-12" v-if="!loading">
-                <div class="card">
-                  <div class="card-body p-3">
-                    <div v-show="submissions.length == 0">
-                      <p class="text-center">Submission not found</p>
-                    </div>
-                    <div class="row">
-                      <div
-                        class="col-md-12 p-2"
-                        v-for="(sub, s) in submissions"
-                        :key="s"
-                      >
-                        <img
-                          class="img-fluid mb-2 float-left"
-                          src="/admin-template/img/logo.png"
-                          width="70"
-                          style="margin-right: 20px"
-                        />
-                        <p class="title-text">
-                          <router-link
-                            :to="{
-                              name: 'DetailSubmission',
-                              params: { id: sub.id },
-                            }"
-                            >{{ sub.title }}</router-link
-                          >
-                        </p>
-                        <p
-                          class="sub-text cat"
-                          style="cursor: pointer"
-                          v-on:click="onSearchByCategory(sub.category)"
-                        >
-                          {{ sub.category_name }}
-                        </p>
-                        <p class="sub-text">
-                          <i
-                            v-for="(subcreator, sc) in sub.upload_form_creator"
-                            :key="sc"
-                            >{{ subcreator.creator }},&nbsp;
-                          </i>
-                          - {{ sub.date }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+              <div class="col d-flex flex-column">
+                <b style="color: #184d47" class="mb-1">
+                  <router-link
+                    :to="{
+                      name: 'DetailSubmission',
+                      params: { id: sub.id },
+                    }"
+                    >{{ sub.title }}</router-link
+                  >
+                </b>
+                <small
+                  style="color:#184d47; cursor: pointer"
+                  v-on:click="onSearchByCategory(sub.category)"
+                  >{{ sub.category_name }}</small
+                >
+                <div class="d-flex">
+                  <small
+                    class="mb-2"
+                    v-for="(subcreator, sc) in sub.upload_form_creator"
+                    :key="sc"
+                  >
+                    {{ subcreator.creator }},&nbsp;
+                  </small>
                 </div>
+                <small class="font-weight-bold" style="color: black">
+                  Date added: {{ sub.date }}
+                </small>
               </div>
             </div>
           </div>
@@ -547,6 +347,40 @@
 p {
   margin: 0;
   padding: 0;
+}
+
+.result-container {
+  padding: 10px;
+}
+
+.apply-btn {
+  background-color: #244943;
+  color: white;
+}
+
+.filter-container {
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.search-box {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  align-content: center;
+  align-items: center;
+  width: 25vw;
+  height: 4rem;
+  border-radius: 0.5rem;
+  border: 1px solid #afafaf;
+  align-content: center;
+}
+.search-box > .form-control {
+  border: 0;
+  outline: none;
+  box-shadow: none;
 }
 .title-text {
   font-size: 18px;
@@ -570,12 +404,19 @@ p {
 export default {
   data() {
     return {
-       perPage: 10,
-        currentPage: 1,
-        rows: 0,
-        jumlahData: null,
+      sort: true,
+      selectedCategory: "",
+      selectedType: "",
+      selectedSubject: "",
+      selectedCreator: "",
+      options: true,
+      perPage: 10,
+      currentPage: 1,
+      rows: 0,
+      jumlahData: null,
+      v_sort: true,
       v_collections: false,
-      v_date: false,
+      v_date: true,
       v_creator: false,
       v_subject: false,
       v_type: false,
@@ -602,52 +443,40 @@ export default {
       return this.$store.getters.getAllCategories;
     },
     creators() {
-      this.rows = this.$store.getters.getAllCreator.length
+      this.rows = this.$store.getters.getAllCreator.length;
       return this.$store.getters.getAllCreator;
     },
   },
-  created () {
+  created() {
     // this.jumlahData = 'haloo'
     //  this.rows = this.$store.getters.getAllCreator.length
   },
   mounted() {
-   
-    
-    if (this.$route.params.part == 'Search') 
-    {
+    if (this.$route.params.part == "Search") {
       this.form.category = this.$route.params.category;
       this.form.search_key = this.$route.params.keySearch;
       this.onSearch();
-    }
-    else if (this.$route.params.part == 'Collection')
-    {
+    } else if (this.$route.params.part == "Collection") {
       this.v_collections = true;
-      this.v_date = false;
+      this.v_date = true;
       this.v_creator = false;
-      this.onCategorySelect(this.$route.params.keySearch, '');
-    }
-    else if (this.$route.params.part == 'This_Month')
-    {
+      this.onCategorySelect(this.$route.params.keySearch, "");
+    } else if (this.$route.params.part == "This_Month") {
       this.v_collections = false;
       this.v_date = true;
       this.v_creator = false;
       this.onThisMonth();
-    }
-    else if (this.$route.params.part == 'Creator')
-    {
+    } else if (this.$route.params.part == "Creator") {
       this.v_collections = false;
-      this.v_date = false;
+      this.v_date = true;
       this.v_creator = true;
       this.onCreatorSelected(this.$route.params.keySearch);
-    }
-    else 
-    {
+    } else {
       this.v_collections = false;
-      this.v_date = false;
+      this.v_date = true;
       this.v_creator = false;
       this.getSubmissions("ASC");
     }
-    
 
     this.$store.dispatch("getCategory");
     this.$store.dispatch("getCreator");
@@ -750,11 +579,9 @@ export default {
     onThisMonth() {
       this.loading = true;
       let data = {
-        this_month: '',
+        this_month: "",
       };
-      axios
-      .post("/api/upload-form/search/new/title", data)
-      .then((res) => {
+      axios.post("/api/upload-form/search/new/title", data).then((res) => {
         // console.log(res);
         this.loading = false;
         this.submissions = res.data.data.form;
@@ -767,7 +594,6 @@ export default {
       this.form.category = id;
       this.loading = true;
       let data = {
-        
         category: id,
       };
       axios.post("/api/upload-form/search/new/title", data).then((res) => {
@@ -782,9 +608,7 @@ export default {
       let data = {
         right_management: type,
       };
-      axios
-      .post("/api/upload-form/search/new/title", data)
-      .then((res) => {
+      axios.post("/api/upload-form/search/new/title", data).then((res) => {
         // console.log(res);
         this.loading = false;
         this.submissions = res.data.data.form;
@@ -798,9 +622,7 @@ export default {
       let data = {
         creator: type,
       };
-      axios
-      .post("/api/upload-form/search/new/title", data)
-      .then((res) => {
+      axios.post("/api/upload-form/search/new/title", data).then((res) => {
         // console.log(res);
         this.loading = false;
         this.submissions = res.data.data.form;

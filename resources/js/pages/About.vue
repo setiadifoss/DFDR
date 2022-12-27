@@ -1,12 +1,84 @@
 <template>
-  <div class="jumbotron">
+  <div>
     <div class="container-fluid">
       <section id="tabs">
-        <div class="card p-4">
+        <div class="p-4">
           <div class="card-body">
             <div class="container mt-4">
               <h6 class="section-title h1 text-center">About Us</h6>
-              <div class="row">
+              <div class="row mb-5">
+                <div
+                  @click="isShow.about = !isShow.about"
+                  class="col d-flex justify-content-between accordion-header"
+                >
+                  <h5 class="font-weight-bold">
+                    What is Repository Institution PKTJ?
+                  </h5>
+                  <i class="fa fa-chevron-down" v-if="!isShow.about"></i>
+                  <i class="fa fa-chevron-up" v-if="isShow.about"></i>
+                </div>
+                <div v-if="isShow.about" class="px-2">
+                  <p>
+                    Digital Repository adalah wadah untuk menampung karya-karya
+                    intelektual dan materi ilmiah para civitas akademika di
+                    Politeknik Keselamatan Transportasi Jalan dalam format
+                    digital yang dapat diakses secara online
+                  </p>
+                </div>
+              </div>
+              <div class="row mb-5">
+                <div
+                  @click="isShow.whoUse = !isShow.whoUse"
+                  class="col d-flex justify-content-between accordion-header"
+                >
+                  <h5 class="font-weight-bold">
+                    Who use Repository Institution PKTJ?
+                  </h5>
+                  <i class="fa fa-chevron-down" v-if="!isShow.whoUse"></i>
+                  <i class="fa fa-chevron-up" v-if="isShow.whoUse"></i>
+                </div>
+                <div v-if="isShow.whoUse" class="px-2">
+                  <p>
+                    Dengan menggunakan digital repository milik Perpustakaan
+                    Politeknik Keselamatan Transportasi Jalan maka pihak kita
+                    bisa :
+                  </p>
+                  <ol type="1">
+                    <li>
+                      Menghimpun hasil karya seluruh civitas akademika sehingga
+                      dapat terdata dan terdigitalisasi sehingga tidak tercecer.
+                    </li>
+                    <li>
+                      Civitas akademika dapat terus melihat hasil karya
+                      intelektual dan materi ilmiah yang telah mereka buat di
+                      Politeknik Keselamatan Transportasi Jalan tanpa takut
+                      hilang.
+                    </li>
+                    <li>
+                      Memperkaya koleksi Perpustakaan Politeknik Keselamatan
+                      Transportasi Jalan.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div class="row mb-5 d-block">
+                <div
+                  @click="isShow.offer = !isShow.offer"
+                  class="col d-flex justify-content-between accordion-header"
+                >
+                  <h5 class="font-weight-bold">
+                    Repository Institution PKTJ Service Offering
+                  </h5>
+                  <i class="fa fa-chevron-down" v-if="!isShow.offer"></i>
+                  <i class="fa fa-chevron-up" v-if="isShow.offer"></i>
+                </div>
+                <div v-if="isShow.offer" class="px-2">
+                  <p>
+                    Digital Repository PKTJ
+                  </p>
+                </div>
+              </div>
+              <!-- <div class="row">
                 <div class="col-xs-12">
                   <nav>
                     <div
@@ -22,7 +94,9 @@
                         role="tab"
                         aria-controls="nav-home"
                         aria-selected="true"
-                        >What is <p v-html="header"></p>?</a
+                        >What is
+                        <p v-html="header"></p>
+                        ?</a
                       >
                       <a
                         class="nav-item nav-link"
@@ -32,7 +106,9 @@
                         role="tab"
                         aria-controls="nav-profile"
                         aria-selected="false"
-                        >Why use <p v-html="header"></p>?</a
+                        >Why use
+                        <p v-html="header"></p>
+                        ?</a
                       >
                       <a
                         class="nav-item nav-link"
@@ -42,7 +118,8 @@
                         role="tab"
                         aria-controls="nav-contact"
                         aria-selected="false"
-                        ><p v-html="header"></p> Service Offerings</a
+                        ><p v-html="header"></p>
+                        Service Offerings</a
                       >
                     </div>
                   </nav>
@@ -56,7 +133,7 @@
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
                     >
-                    <p v-html="what_is"></p>
+                      <p v-html="what_is"></p>
                     </div>
                     <div
                       class="tab-pane fade"
@@ -64,7 +141,7 @@
                       role="tabpanel"
                       aria-labelledby="nav-profile-tab"
                     >
-                     <p v-html="why_we_use"></p>
+                      <p v-html="why_we_use"></p>
                     </div>
                     <div
                       class="tab-pane fade"
@@ -72,11 +149,11 @@
                       role="tabpanel"
                       aria-labelledby="nav-contact-tab"
                     >
-                    <p v-html="service_offering"></p>
+                      <p v-html="service_offering"></p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -94,6 +171,11 @@ export default {
       service_offering: null,
       header: null,
       description: null,
+      isShow: {
+        about: true,
+        whoUse: true,
+        offer: true,
+      },
     };
   },
   methods: {
@@ -136,11 +218,6 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: 1rem !important;
-}
-
 section .section-title {
   text-align: start;
   color: #007b5e;
@@ -150,6 +227,11 @@ section .section-title {
 .active {
   font-weight: normal !important;
 }
+
+.accordion-header {
+  cursor: pointer;
+}
+
 #tabs {
   /* background: #007b5e; */
   color: #2f3542;
