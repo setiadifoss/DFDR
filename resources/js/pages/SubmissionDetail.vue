@@ -1,25 +1,27 @@
 <template>
   <div class="container-fluid mt-4 mb-4">
-    <div class="row justify-content-center">
+    <div class="text-center" v-if="loading">
+      <loading-component></loading-component>
+    </div>
+    <div class="row justify-content-center" v-else>
       <div class="row mb-5">
         <div class="col-2">
           <div class="image-template"></div>
         </div>
-        <div class="col-10 d-flex flex-column justify-content-between">
+        <div
+          style="width: 100%;"
+          class="col-10 d-flex flex-column justify-content-between"
+        >
           <div>
             <h4>
-              <b class="primary-text">
-                Upaya Peningkatan Keselamatan Jalan pada Simpang Tak Bersinyal
-                dengan Metode Hazard Identification Risk And Assessment (HIRA)
-                Studi Kasus: Simpang 4 Damri Jalan Ahmad Yani Kota Surakarta
-              </b>
+              <b class="primary-text">{{ submissions.title }} </b>
             </h4>
           </div>
           <div class="d-flex">
             <i class="fa fa-solid fa-eye pt-1 mr-2"></i>
-            <b class="mr-2">123 Views</b>
+            <b class="mr-2">{{ tView }} Views</b>
             <i class="fa fa-solid fa-download pt-1 mr-2"></i>
-            <b>60 Downloads</b>
+            <b>{{ tDownload }} Downloads</b>
           </div>
         </div>
       </div>
@@ -29,51 +31,112 @@
         </h5>
         <div class="information-table card">
           <div class="information-row">
-            <p>Author</p>
-            <p>Frashin Esa Nadya Sulistiyanto</p>
-          </div>
-          <div class="information-row">
             <p>Contributor</p>
-            <p>
-              Dr. Siti Maimunah, S.Si, MSE, MA, Muhamad Kusuma Pradana Nugroho
-              Suadi A.TD, MT,
+            <p
+              v-for="(cont, cnt) in submissions.upload_form_contributor"
+              :key="cnt"
+            >
+              {{ cont.contributor + ", " }}
             </p>
           </div>
           <div class="information-row">
-            <p>Collection Type</p>
-            <p>Bachelor</p>
+            <p>Creator</p>
+            <p v-for="(cre, cr) in submissions.upload_form_creator" :key="cr">
+              {{ cre.creator + ", " }}
+            </p>
+          </div>
+          <div class="information-row">
+            <p>Description</p>
+            <p>
+              {{ submissions.description }}
+            </p>
+          </div>
+          <div class="information-row">
+            <p>Coverage</p>
+            <ul>
+              <li
+                v-for="(cov, cv) in submissions.upload_form_coverage"
+                :key="cv"
+              >
+                <p>{{ cov.coverage }}</p>
+              </li>
+            </ul>
           </div>
           <div class="information-row">
             <p>Publisher</p>
-            <p>Politeknik Keselamatan Transportasi Jalan</p>
+            <p>{{ submissions.publisher }}</p>
           </div>
           <div class="information-row">
-            <p>Options</p>
-            <p>Open</p>
+            <p>Relation</p>
+            <p>{{ submissions.relation }}</p>
           </div>
           <div class="information-row">
             <p>Subject</p>
-            <p>DIV-MKTJ</p>
+            <ul>
+              <li
+                v-for="(sub, sb) in submissions.upload_form_subject"
+                :key="sb"
+              >
+                {{ sub.subject }}
+              </li>
+            </ul>
           </div>
           <div class="information-row">
             <p>Type</p>
-            <p>Publish</p>
+            <ul>
+              <li v-for="(typ, ty) in submissions.upload_form_type" :key="ty">
+                {{ typ.type }}
+              </li>
+            </ul>
           </div>
           <div class="information-row">
             <p>Languange</p>
-            <p>Bahasa Indonesia</p>
+            <p>{{ languange }}</p>
           </div>
           <div class="information-row">
-            <p>Keyword</p>
-            <p>Keselamatan jalan, simpang tak bersinyal, metode HIRA</p>
+            <p>Division</p>
+            <ul>
+              <li
+                v-for="(div, dv) in submissions.upload_form_division"
+                :key="dv"
+              >
+                {{ div.division }}
+              </li>
+            </ul>
           </div>
           <div class="information-row">
-            <p>Number of File</p>
-            <p>7 Files</p>
+            <p>Format</p>
+            <ul>
+              <li
+                v-for="(form, fr) in submissions.upload_form_format"
+                :key="fr"
+              >
+                {{ form.format }}
+              </li>
+            </ul>
+          </div>
+          <div class="information-row">
+            <p>Identifier</p>
+            <ul>
+              <li
+                v-for="(iden, id) in submissions.upload_form_identifier"
+                :key="id"
+              >
+                {{ iden.identifier }}
+              </li>
+            </ul>
+          </div>
+          <div class="information-row">
+            <p>Source</p>
+            <ul>
+              <li v-for="(src, sr) in submissions.upload_form_source" :key="sr">
+                {{ src.source }}
+              </li>
+            </ul>
           </div>
           <div class="information-row">
             <p>Date Added</p>
-            <p>21 November 2022</p>
+            <p>{{ submissions.date }}</p>
           </div>
         </div>
         <div class="row">
@@ -96,84 +159,28 @@
         </div>
         <div v-if="!isShowFile" class="row p-3">
           <p>
-            ABSTRAK/INTISARI Banyaknya pertumbuhan kendaraan wajib uji juga
-            harus diimbangi dengan adanya pelayanan yang semakin baik, selain
-            itu banyak alat uji yang tidak digunakan dan sarana komunikasi
-            informasi yang kurang, agar dibenahi sehingga tidak terjadi
-            pengurangan kesadaran uji oleh masyarakat. Penelitian ini bertujuan
-            untuk mengetahui penyelenggaraan Pengujian di Pengujian Kota
-            Surakarta, mengetahui kondisi sarana dan prasarana Pengujian Kota
-            Surakarta, serta mengkaji efektifitas pengujian dua lajur yang
-            berada di Pengujian Kendaraan Bermotor Kota Surakarta. Kegiatan
-            penyusunan penelitian ini adalah penelitian dengan menggunakan
-            metode deskriptif, cara pengambila data dengan wawancara serta
-            observasi lapangan menggunakan instrumen-instrumen terkait
-            penelitian. Dari hasil penelitian yang dilakukan dapat disimpulkan
-            bahwa sistem pengujian dua lajur di Pengujian Kota Surakarta masih
-            ada yang perlu dibenahi agar optimalnya sistem pengujian dua lajur
-            tersebut. Kata Kunci : Pelayanan Maksimal, Pengujian Kendaraan
-            Bermotor Kota Surakart, Sistem Pengujian Dua lajur. ABSTRACT The
-            number of vehicle growth must be tested must also be balanced with
-            better service, in addition to many test tools that are not used and
-            means of information communication is lacking, to be improved so
-            that there is no reduction of consciousness Tested by the community.
-            This research aims to determine the implementation of testing in the
-            city testing of Surakarta, knowing the condition of the facility and
-            infrastructure testing of Surakarta city, as well as reviewing the
-            effectiveness of testing two lanes in motor vehicle testing
-            Surakarta City. The preparation of this research activities are
-            research using descriptive methods, how to use data with interviews
-            and field observations using research related instruments. From the
-            results of the study can be concluded that the test system of two
-            lanes in the city testing of Surakarta still has to be addressed in
-            order to optimize the testing system of the two columns. Keywords:
-            Maximum Service, The Motor Vehicle Testing of Surakarta City, Two
-            Lane Testing System.
+            {{ submissions.description }}
           </p>
         </div>
         <div v-else class="row p-3">
           <div class="row" style="width: 100%">
-            <div class="col-1 primary-text">
+            <div v-show="submissions.file != null" class="col-1 primary-text">
               <img :src="pdfLogo" alt="pdf-logo" />
             </div>
-            <div class="col-11 mb-3">
-              <p class="mb-2">1808086018_Frashin Esa Nadya Sulistiyanto.pdf</p>
-              <button class="pdf-btn">Open</button>
+            <div v-show="submissions.file != null" class="col-11 mb-3">
+              <p class="mb-2">{{ submissions.file }}</p>
+              <button @click="pdfLibrary(submissions.file)" class="pdf-btn">
+                Open
+              </button>
             </div>
-            <div class="col-1 primary-text">
+            <div v-show="submissions.file != null" class="col-1 primary-text">
               <img :src="pdfLogo" alt="pdf-logo" />
             </div>
-            <div class="col-11 mb-3">
-              <p class="mb-2">1808086018_Frashin Esa Nadya Sulistiyanto.pdf</p>
-              <button class="pdf-btn">Open</button>
-            </div>
-            <div class="col-1 primary-text">
-              <img :src="pdfLogo" alt="pdf-logo" />
-            </div>
-            <div class="col-11 mb-3">
-              <p class="mb-2">1808086018_Frashin Esa Nadya Sulistiyanto.pdf</p>
-              <button class="pdf-btn">Open</button>
-            </div>
-            <div class="col-1 primary-text">
-              <img :src="pdfLogo" alt="pdf-logo" />
-            </div>
-            <div class="col-11 mb-3">
-              <p class="mb-2">1808086018_Frashin Esa Nadya Sulistiyanto.pdf</p>
-              <button class="pdf-btn">Open</button>
-            </div>
-            <div class="col-1 primary-text">
-              <img :src="pdfLogo" alt="pdf-logo" />
-            </div>
-            <div class="col-11 mb-3">
-              <p class="mb-2">1808086018_Frashin Esa Nadya Sulistiyanto.pdf</p>
-              <button class="pdf-btn">Open</button>
-            </div>
-            <div class="col-1 primary-text">
-              <img :src="pdfLogo" alt="pdf-logo" />
-            </div>
-            <div class="col-11 mb-3">
-              <p class="mb-2">1808086018_Frashin Esa Nadya Sulistiyanto.pdf</p>
-              <button class="pdf-btn">Open</button>
+            <div v-show="submissions.file != null" class="col-11 mb-3">
+              <p class="mb-2">{{ submissions.file }}</p>
+              <button @click="viewPdf(submissions.file)" class="pdf-btn">
+                Open
+              </button>
             </div>
           </div>
         </div>
@@ -197,9 +204,6 @@
         </div>
       </div>
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="text-center" v-if="loading">
-          <loading-component></loading-component>
-        </div>
         <div v-if="!loading">
           <div v-if="showDetail">
             <div class="card p-4 mt-3">
@@ -207,156 +211,6 @@
                 <a v-on:click="onDetail()" style="cursor: pointer; color: blue">
                   Show simple item record</a
                 >
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="text-center">{{ this.submissions.title }}</h3>
-                  </div>
-                </div>
-                <table class="table table-striped">
-                  <tbody>
-                    <tr>
-                      <th scope="row">Date</th>
-                      <td>{{ this.submissions.date }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Description</th>
-                      <td><div v-html="submissions.description"></div></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Language</th>
-                      <td>{{ this.language }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Publisher</th>
-                      <td>{{ this.submissions.publisher }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Relation</th>
-                      <td>{{ this.submissions.relation }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Contributor</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(cont,
-                            cnt) in submissions.upload_form_contributor"
-                            :key="cnt"
-                          >
-                            {{ cont.contributor }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Coverage</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(cov,
-                            cv) in submissions.upload_form_coverage"
-                            :key="cv"
-                          >
-                            {{ cov.coverage }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Creator</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(cre, cr) in submissions.upload_form_creator"
-                            :key="cr"
-                          >
-                            {{ cre.creator }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Division</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(div,
-                            dv) in submissions.upload_form_division"
-                            :key="dv"
-                          >
-                            {{ div.division }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Format</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(form, fr) in submissions.upload_form_format"
-                            :key="fr"
-                          >
-                            {{ form.format }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Identifier</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(iden,
-                            id) in submissions.upload_form_identifier"
-                            :key="id"
-                          >
-                            {{ iden.identifier }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Source</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(src, sr) in submissions.upload_form_source"
-                            :key="sr"
-                          >
-                            {{ src.source }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Subject</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(sub, sb) in submissions.upload_form_subject"
-                            :key="sb"
-                          >
-                            {{ sub.subject }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Type</th>
-                      <td>
-                        <ul>
-                          <li
-                            v-for="(typ, ty) in submissions.upload_form_type"
-                            :key="ty"
-                          >
-                            {{ typ.type }}
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
                 <div class="row">
                   <div class="col-md-12">
                     <h3>File in this Submission</h3>
@@ -384,9 +238,6 @@
                         v-for="(file, f) in submissions.upload_form_file"
                         :key="f"
                       >
-                        <!-- <p v-show="submissions.right_management == 'Close'">
-                          {{ file.file_name }} ( {{ file.file_size }} )
-                        </p> -->
                         <a
                           :href="
                             '/storage/uploads/file_upload/' + file.file_name
@@ -425,9 +276,6 @@
               <div class="col-md-9">
                 <div class="card p-4 mb-4">
                   <div class="card-body">
-                    <h3 class="text-center mb-4">
-                      {{ this.submissions.title }}
-                    </h3>
                     <div v-html="submissions.description"></div>
 
                     <br />
@@ -508,19 +356,7 @@
                       </li>
                     </ul>
                     <hr />
-                    <div>
-                      <h6>Total Download :</h6>
-                      <span style="font-weight: bold; margin-left: 12px">{{
-                        tDownload
-                      }}</span>
-                    </div>
                     <hr />
-                    <div>
-                      <h6>Total View :</h6>
-                      <span style="font-weight: bold; margin-left: 12px">{{
-                        tView
-                      }}</span>
-                    </div>
                     <hr />
                     <div>
                       <h6>Creator :</h6>
