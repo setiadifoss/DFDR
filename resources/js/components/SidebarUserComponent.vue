@@ -63,7 +63,9 @@
             <router-link :to="{ name: 'UploadFile' }" class="collapse-item"
               >Upload Deposit</router-link
             >
-            <router-link :to="{ name: 'UploadedFileRead' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'UploadedFileRead' }"
+              class="collapse-item"
               >All Deposits</router-link
             >
             <router-link :to="{ name: 'MyUpload' }" class="collapse-item"
@@ -208,7 +210,7 @@
         </div>
       </li>
 
- <!-- User Management -->
+      <!-- User Management -->
       <li class="nav-item">
         <a
           class="nav-link collapsed"
@@ -228,23 +230,30 @@
           data-parent="#accordionSidebar"
         >
           <div class="bg-white py-2 collapse-inner rounded">
-              <router-link :to="{ name: 'TemplateSlider' }" class="collapse-item"
+            <router-link :to="{ name: 'TemplateThemes' }" class="collapse-item"
+              >Themes</router-link
+            >
+            <router-link :to="{ name: 'TemplateSlider' }" class="collapse-item"
               >Slider</router-link
             >
-              <router-link :to="{ name: 'TemplateFooterImage' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'TemplateFooterImage' }"
+              class="collapse-item"
               >Footer image</router-link
             >
             <router-link :to="{ name: 'TemplateHome' }" class="collapse-item"
               >Home</router-link
             >
-            <router-link :to="{ name: 'TemplateSubmission' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'TemplateSubmission' }"
+              class="collapse-item"
               >Submission</router-link
             >
             <router-link :to="{ name: 'TemplateAbout' }" class="collapse-item"
               >About us</router-link
             >
 
-              <router-link :to="{ name: 'TemplateContact' }" class="collapse-item"
+            <router-link :to="{ name: 'TemplateContact' }" class="collapse-item"
               >Contact</router-link
             >
           </div>
@@ -270,7 +279,9 @@
           data-parent="#accordionSidebar"
         >
           <div class="bg-white py-2 collapse-inner rounded">
-            <router-link :to="{ name: 'EditorManagement' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'EditorManagement' }"
+              class="collapse-item"
               >List Editors</router-link
             >
             <router-link :to="{ name: 'BulkEditor' }" class="collapse-item"
@@ -341,10 +352,14 @@
             <router-link :to="{ name: 'ReportChart' }" class="collapse-item"
               >All Deposit</router-link
             >
-            <router-link :to="{ name: 'ReportChartCategory' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'ReportChartCategory' }"
+              class="collapse-item"
               >By Filters</router-link
             >
-            <router-link :to="{ name: 'ReportChartEditor' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'ReportChartEditor' }"
+              class="collapse-item"
               >By Editor</router-link
             >
           </div>
@@ -374,10 +389,14 @@
             <router-link :to="{ name: 'ReportPdf' }" class="collapse-item"
               >All Deposit</router-link
             >
-            <router-link :to="{ name: 'UploadedFileUser' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'UploadedFileUser' }"
+              class="collapse-item"
               >By User Contribution</router-link
             >
-            <router-link :to="{ name: 'UploadedFileMonth' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'UploadedFileMonth' }"
+              class="collapse-item"
               >By Month Submission</router-link
             >
           </div>
@@ -567,7 +586,9 @@
             <router-link :to="{ name: 'ReportChart' }" class="collapse-item"
               >All Deposit</router-link
             >
-            <router-link :to="{ name: 'ReportChartCategory' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'ReportChartCategory' }"
+              class="collapse-item"
               >By Filters</router-link
             >
           </div>
@@ -597,10 +618,14 @@
             <router-link :to="{ name: 'ReportPdf' }" class="collapse-item"
               >All Deposit</router-link
             >
-            <router-link :to="{ name: 'UploadedFileUser' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'UploadedFileUser' }"
+              class="collapse-item"
               >By User Contribution</router-link
             >
-            <router-link :to="{ name: 'UploadedFileMonth' }" class="collapse-item"
+            <router-link
+              :to="{ name: 'UploadedFileMonth' }"
+              class="collapse-item"
               >By Month Submission</router-link
             >
           </div>
