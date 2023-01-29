@@ -1,6 +1,6 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
-
+// @import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 // Variables
 @import "variables";
 
@@ -51,6 +51,11 @@
 .bg-grey {
   background-color: #96bb7c;
   color: #002145;
+}
+
+.bg-header {
+  background-color: #2f4540;
+  color: white;
 }
 
 .header {
