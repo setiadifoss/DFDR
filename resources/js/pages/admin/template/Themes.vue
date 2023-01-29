@@ -27,6 +27,14 @@
         </div>
       </div>
     </div>
+    <input type="file" v-show="false" ref="file" />
+    <button
+      @click="addTheme()"
+      class="btn pmd-btn-fab pmd-ripple-effect btn-primary pmd-btn-raised add-button"
+      type="button"
+    >
+      <i class="material-icons pmd-sm">add</i>
+    </button>
   </div>
 </template>
 
@@ -66,6 +74,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    addTheme() {
+      this.$refs.file.click();
+    },
   },
 };
 </script>
@@ -109,5 +122,16 @@ export default {
   height: 2rem;
   background-color: transparent;
   box-shadow: none;
+}
+
+.add-button {
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 600;
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
 }
 </style>
