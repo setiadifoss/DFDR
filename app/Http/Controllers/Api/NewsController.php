@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="News",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class NewsController extends Controller
 {
     use ApiResponser;
@@ -17,6 +24,15 @@ class NewsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/news",
+     *     tags={"News"},
+     *     description="View All",
+     *     operationId="findAllNews",
+     *     @OA\Response(response="default", description="Success get data")
+     * )
      */
     public function index()
     {
@@ -49,6 +65,46 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+     /**
+     * @OA\Post(
+     *     path="/news",
+     *     tags={"News"},
+     *     description="Add new",
+     *     operationId="postNews",
+     *     @OA\RequestBody(
+     *         description="Add new News",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="News Title",
+     *                     property="news_title",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="News Description",
+     *                     property="news_desc",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="News Thumbnail",
+     *                     property="news_thumb",
+     *                     type="file"
+     *                 ),
+     *                 required={"news_title","news_desc","news_thumb"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function store(Request $request)
     {
       // dd(Auth::User()->id);
@@ -78,6 +134,29 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/news/{id}",
+     *     tags={"News"},
+     *     description="View By Id",
+     *     operationId="showNews",
+     *     @OA\Parameter(
+     *         description="ID of News",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function show($id)
     {
         $news = News::find($id);
@@ -90,6 +169,44 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/news/{id}",
+     *     tags={"News"},
+     *     description="Update Data",
+     *     operationId="putNews",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="news_title",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="news_desc",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of News",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Update Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -127,6 +244,31 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Delete(
+     *     path="/news/{id}",
+     *     tags={"News"},
+     *     description="Delete Data",
+     *     operationId="destroyNews",
+     *     @OA\Parameter(
+     *         description="ID of News",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function destroy($id)
     {
       $news = News::destroy($id);
@@ -138,6 +280,30 @@ class NewsController extends Controller
      *
      * @param  str  $name
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/news/search/{name}",
+     *     tags={"News"},
+     *     description="Search Data",
+     *     operationId="searchNews",
+     *     @OA\Parameter(
+     *         description="News Title",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Search Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
      */
     public function search($name)
     {

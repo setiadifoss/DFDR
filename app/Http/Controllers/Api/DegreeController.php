@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="Degree",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class DegreeController extends Controller
 {
     use ApiResponser;
@@ -17,6 +24,14 @@ class DegreeController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/degree",
+     *     tags={"Degree"},
+     *     description="Degree",
+     *     @OA\Response(response="default", description="Degree Index")
+     * )
      */
     public function index()
     {
@@ -30,6 +45,36 @@ class DegreeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Post(
+     *     path="/degree",
+     *     tags={"Degree"},
+     *     description="Add new",
+     *     operationId="postDegree",
+     *     @OA\RequestBody(
+     *         description="Add new Degree",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="Degree Name",
+     *                     property="degree_name",
+     *                     type="string"
+     *                 ),
+     *                 required={"degree_name"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function store(Request $request)
     {
@@ -50,6 +95,29 @@ class DegreeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/degree/{id}",
+     *     tags={"Degree"},
+     *     description="View By Id",
+     *     operationId="showDegree",
+     *     @OA\Parameter(
+     *         description="ID of Degree",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function show($id)
     {
       $degree = Degree::find($id);
@@ -62,6 +130,41 @@ class DegreeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/degree/{id}",
+     *     tags={"Degree"},
+     *     description="Update Data",
+     *     operationId="putDegree",
+     *     @OA\RequestBody(
+     *         description="Add new Degree",
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="degree_name",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of Degree",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Update Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -82,6 +185,31 @@ class DegreeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Delete(
+     *     path="/degree/{id}",
+     *     tags={"Degree"},
+     *     description="Delete Data",
+     *     operationId="destroyDegree",
+     *     @OA\Parameter(
+     *         description="ID of Degree",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function destroy($id)
     {
       $degree = Degree::destroy($id);
@@ -93,6 +221,30 @@ class DegreeController extends Controller
      *
      * @param  str  $name
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/degree/search/{name}",
+     *     tags={"Degree"},
+     *     description="Search Data",
+     *     operationId="searchDegree",
+     *     @OA\Parameter(
+     *         description="Name of Degree",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Search Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
      */
     public function search($name)
     {

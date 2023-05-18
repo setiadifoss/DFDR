@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="Department",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class DepartmentController extends Controller
 {
     use ApiResponser;
@@ -17,6 +24,15 @@ class DepartmentController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/department",
+     *     tags={"Department"},
+     *     description="View All",
+     *     operationId="findAllDepartment",
+     *     @OA\Response(response="default", description="Success get data")
+     * )
      */
     public function index()
     {
@@ -30,6 +46,36 @@ class DepartmentController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Post(
+     *     path="/department",
+     *     tags={"Department"},
+     *     description="Add new",
+     *     operationId="postDepartment",
+     *     @OA\RequestBody(
+     *         description="Add new Department",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="Department Name",
+     *                     property="department_name",
+     *                     type="string"
+     *                 ),
+     *                 required={"department_name"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function store(Request $request)
     {
@@ -58,6 +104,29 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/department/{id}",
+     *     tags={"Department"},
+     *     description="View By Id",
+     *     operationId="showDepartment",
+     *     @OA\Parameter(
+     *         description="ID of Department",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function show($id)
     {
       $department = Department::find($id);
@@ -70,6 +139,41 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/department/{id}",
+     *     tags={"Department"},
+     *     description="Update Data",
+     *     operationId="putDepartment",
+     *     @OA\RequestBody(
+     *         description="Add new Department",
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="department_name",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of Department",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Update Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -98,6 +202,31 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Delete(
+     *     path="/department/{id}",
+     *     tags={"Department"},
+     *     description="Delete Data",
+     *     operationId="destroyDepartment",
+     *     @OA\Parameter(
+     *         description="ID of Department",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function destroy($id)
     {
       $department = Department::destroy($id);
@@ -109,6 +238,30 @@ class DepartmentController extends Controller
      *
      * @param  str  $name
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/department/search/{name}",
+     *     tags={"Department"},
+     *     description="Search Data",
+     *     operationId="searchDepartment",
+     *     @OA\Parameter(
+     *         description="Name of Department",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Search Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
      */
     public function search($name)
     {

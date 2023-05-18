@@ -228,9 +228,9 @@ Route::get('/faculty/{id}', [FacultyController::class, 'show']);
 Route::get('/faculty/search/{name}', [FacultyController::class, 'search']);
 
 // Instruction
-// Route::get('/instruction', [InstructionController::class, 'index']);
-// Route::get('/instruction/{id}', [InstructionController::class, 'show']);
-// Route::get('/instruction/search/{name}', [InstructionController::class, 'search']);
+Route::get('/instruction', [InstructionController::class, 'index']);
+Route::get('/instruction/{id}', [InstructionController::class, 'show']);
+Route::get('/instruction/search/{name}', [InstructionController::class, 'search']);
 
 // Language
 Route::get('/language', [LanguageController::class, 'index']);
@@ -265,7 +265,7 @@ Route::get('/upload-form/json-generated', [UploadFormController::class, 'jsonGen
 // Route::get('/upload-form/testjson', [UploadFormController::class, 'testjson']);
 
 Route::get('/upload-form/search/year/{year}/{sort?}', [UploadFormController::class, 'searchByYear']);
-// Route::get('/upload-form/search/title/{title}/{sort?}', [UploadFormController::class, 'searchByTitle']);
+Route::get('/upload-form/search/title/{title}/{sort?}', [UploadFormController::class, 'searchByTitle']);
 Route::get('/upload-form/search/creator/{creator}/{sort?}', [UploadFormController::class, 'searchByCreator']);
 Route::get('/upload-form/search/category/{category}/{sort?}', [UploadFormController::class, 'searchByCategory']);
 Route::get('/upload-form/search/status/{status}/{sort?}', [UploadFormController::class, 'searchByStatus']);

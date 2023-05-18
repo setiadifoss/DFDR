@@ -25,10 +25,121 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Seeder;
 
+/**
+ * @OA\SecurityScheme(
+*      securityScheme="bearerAuth",
+*      in="header",
+*      name="bearerAuth",
+*      type="http",
+*      scheme="bearer",
+*      bearerFormat="JWT",
+* ),
+ * @OA\Tag(
+ *     name="Auth",
+ *     description="Auth endpoints",
+ * )
+ */
 class AuthController extends Controller
 {
   use ApiResponser;
 
+  /**
+     * @OA\Post(
+     *     path="/register",
+     *     tags={"Auth"},
+     *     description="Register API",
+     *     operationId="register",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={
+     *                      "name","phone","email","date_of_birth",
+     *                      "place_of_birth","department","faculty","gender",
+     *                      "years","address", "upload_card", "created_from",
+     *                      "role"
+     *                 },
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="date_of_birth",
+     *                     type="string",
+     *                     example="1990-01-01"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="place_of_birth",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="department",
+     *                     type="integer",
+     *                     format="int64",
+     *                     example=1
+     *                 ),
+     *                 @OA\Property(
+     *                     property="faculty",
+     *                     type="integer",
+     *                     format="int64",
+     *                     example=0
+     *                 ),
+     *                 @OA\Property(
+     *                     property="gender",
+     *                     type="string",
+     *                     example="L"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="years",
+     *                     type="integer",
+     *                     format="int64",
+     *                     example=0
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="role",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="created_from",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="passwordRe",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="file to upload",
+     *                     property="upload_card",
+     *                     type="string",
+     *                     format="binary",
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function register(Request $request) {
         // dd($request->all());
         $fields = $request->validate([
@@ -122,6 +233,73 @@ class AuthController extends Controller
           return $this->success(['user' => $user , 'token' => $token]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/registerAdmin",
+     *     tags={"Auth"},
+     *     description="Register Admin API",
+     *     operationId="registerAdmin",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={
+     *                      "name","phone","email","date_of_birth",
+     *                      "place_of_birth","gender",
+     *                      "address", "upload_card", 
+     *                      "password"
+     *                 },
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="date_of_birth",
+     *                     type="string",
+     *                     example="1990-01-01"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="place_of_birth",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="gender",
+     *                     type="string",
+     *                     example="L"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="file to upload",
+     *                     property="upload_card",
+     *                     type="string",
+     *                     format="binary",
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function registerAdmin(Request $request) {
         
         $fields = $request->validate([
@@ -133,7 +311,6 @@ class AuthController extends Controller
             'date_of_birth' => 'required',
             'gender' => 'required',
             'address' => 'required',
-            'role' => 'required',
             'upload_card' => 'required|mimes:png,jpg|max:2048',
         ]);
         
@@ -193,6 +370,38 @@ class AuthController extends Controller
         return $this->success(['user' => $fields]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/login",
+     *     tags={"Auth"},
+     *     description="login API",
+     *     operationId="postAuth",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="Email/Username",
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="Password",
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *                 required={"email","password"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function login(Request $request) {
         $fields = $request->validate([
             'email' => 'required|string',
@@ -220,6 +429,15 @@ class AuthController extends Controller
         return $this->success(['user' => $user , 'token' => $token]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/logout",
+     *     tags={"Auth"},
+     *     description="Auth",
+     *     @OA\Response(response="default", description="preAdmin Index"),
+     *     security={{"bearerAuth":{}}}, 
+     * ),
+     */
     public function logout() {
         auth()->user()->tokens()->delete();
 
@@ -234,6 +452,14 @@ class AuthController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     
+    /**
+     * @OA\Get(
+     *     path="/preAdmin",
+     *     tags={"Auth"},
+     *     description="Auth",
+     *     @OA\Response(response="default", description="preAdmin Index")
+     * )
+     */
     public function preAdmin() {
       
       $user = User::get()->count();
