@@ -36,7 +36,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 
-
+/**
+ *
+ * @OA\Tag(
+ *     name="Report",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class ReportController extends Controller
 {
   use ApiResponser;
@@ -80,6 +86,14 @@ class ReportController extends Controller
   //   );
   // }
 
+  /**
+     * @OA\Get(
+     *     path="/creators",
+     *     tags={"Report"},
+     *     description="Report",
+     *     @OA\Response(response="default", description="Report show creator")
+     * )
+     */
   public function ShowCreator()
   {
     $data = UploadFormCreator::distinct()
@@ -92,6 +106,14 @@ class ReportController extends Controller
     );
   }
 
+  /**
+     * @OA\Get(
+     *     path="/list/data/type",
+     *     tags={"Report"},
+     *     description="Report",
+     *     @OA\Response(response="default", description="Report show type")
+     * )
+     */
   public function ShowType()
   {
     $data = UploadFormType::distinct()->get('type');
@@ -102,6 +124,14 @@ class ReportController extends Controller
     );
   }
 
+  /**
+     * @OA\Get(
+     *     path="/list/data/subject",
+     *     tags={"Report"},
+     *     description="Report",
+     *     @OA\Response(response="default", description="Report show subject")
+     * )
+     */
   public function ShowSubject()
   {
     $data = UploadFormSubject::distinct()->get('subject');
@@ -215,6 +245,14 @@ class ReportController extends Controller
     ]);
   }
 
+  /**
+     * @OA\Get(
+     *     path="/group/count/deposit",
+     *     tags={"Report"},
+     *     description="Report",
+     *     @OA\Response(response="default", description="Report show Count Group Deposit")
+     * )
+     */
   public function countGroupCategory()
   {
     $listCount = DB::table('upload_form')
@@ -579,7 +617,56 @@ class ReportController extends Controller
     );
   }
 
-
+    /**
+     * @OA\Post(
+     *     path="/pdf/generated/report/",
+     *     tags={"Report"},
+     *     description="PDF Generated Report",
+     *     operationId="getPdfReportGenerated",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="filter",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="start_date",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="end_date",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="sort",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="order",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="category",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="mode",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="report_name",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Check Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
+     */
   public function pdfReportGenerated(Request $request)
   {
 
@@ -817,6 +904,29 @@ class ReportController extends Controller
     }
   }
 
+  /**
+     * @OA\Get(
+     *     path="/pdf/deposit/{id}/report/",
+     *     tags={"Report"},
+     *     description="get Pdf Report Deposit",
+     *     operationId="getPdfReportDeposit",
+     *     @OA\Parameter(
+     *         description="ID of Report",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
   public function getPdfReportDeposit($id)
   {
 
@@ -828,6 +938,34 @@ class ReportController extends Controller
     # code...
   }
 
+  /**
+     * @OA\Post(
+     *     path="/excel/import/report/",
+     *     tags={"Report"},
+     *     description="Excel Form Import",
+     *     operationId="excelFormImport",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"file"},
+     *                 @OA\Property(
+     *                     description="file to upload",
+     *                     property="file",
+     *                     type="string",
+     *                     format="binary",
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
   public function excelFormImport(Request $request)
   {
     try {
@@ -847,6 +985,34 @@ class ReportController extends Controller
     # code...
   }
 
+  /**
+     * @OA\Post(
+     *     path="/excel/import/subject",
+     *     tags={"Report"},
+     *     description="Excel Form Import subject",
+     *     operationId="importSubject",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"file"},
+     *                 @OA\Property(
+     *                     description="file to upload",
+     *                     property="file",
+     *                     type="string",
+     *                     format="binary",
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
   public function importSubject(Request $request)
   {
     try {
@@ -864,6 +1030,14 @@ class ReportController extends Controller
     }
   }
 
+  /**
+     * @OA\Get(
+     *     path="/excel/export/subject",
+     *     tags={"Report"},
+     *     description="Report",
+     *     @OA\Response(response="default", description="Download Excel Subject")
+     * )
+     */
   public function exportSubject()
   {
     return Excel::download(new SubjectsExport, 'subjects.xlsx');

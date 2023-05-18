@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="Year",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class YearController extends Controller
 {
     use ApiResponser;
@@ -17,6 +24,15 @@ class YearController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/year",
+     *     tags={"Year"},
+     *     description="View All",
+     *     operationId="findAllYear",
+     *     @OA\Response(response="default", description="Success get data")
+     * )
      */
     public function index()
     {
@@ -30,6 +46,36 @@ class YearController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Post(
+     *     path="/year",
+     *     tags={"Year"},
+     *     description="Add new",
+     *     operationId="postYear",
+     *     @OA\RequestBody(
+     *         description="Add new Year",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="Year",
+     *                     property="year",
+     *                     type="string"
+     *                 ),
+     *                 required={"year"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function store(Request $request)
     {
@@ -58,6 +104,29 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/year/{id}",
+     *     tags={"Year"},
+     *     description="View By Id",
+     *     operationId="showYear",
+     *     @OA\Parameter(
+     *         description="ID of Year",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function show($id)
     {
         $year = Year::find($id);
@@ -70,6 +139,40 @@ class YearController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/year/{id}",
+     *     tags={"Year"},
+     *     description="Update Data",
+     *     operationId="putYear",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="year",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of Year",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Update Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -97,6 +200,31 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Delete(
+     *     path="/year/{id}",
+     *     tags={"Year"},
+     *     description="Delete Data",
+     *     operationId="destroyYear",
+     *     @OA\Parameter(
+     *         description="ID of Year",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function destroy($id)
     {
       $year = Year::destroy($id);
@@ -108,6 +236,30 @@ class YearController extends Controller
      *
      * @param  str  $name
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/year/search/{name}",
+     *     tags={"Year"},
+     *     description="Search Data",
+     *     operationId="searchYear",
+     *     @OA\Parameter(
+     *         description="Name of Year",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Search Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
      */
     public function search($name)
     {

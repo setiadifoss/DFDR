@@ -4,8 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="File",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class FileController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/file/{file_name}",
+     *     tags={"File"},
+     *     description="File",
+     *     @OA\Parameter(
+     *         description="File Name",
+     *         in="path",
+     *         name="file_name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Get File"),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function getFile($file_name)
     {
         try {
