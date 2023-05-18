@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="Category",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class CategoryController extends Controller
 {
     use ApiResponser;
@@ -17,6 +24,15 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+     /**
+     * @OA\Get(
+     *     path="/category",
+     *     tags={"Category"},
+     *     description="View All",
+     *     operationId="findAllCategory",
+     *     @OA\Response(response="default", description="Success get data")
+     * )
      */
     public function index()
     {
@@ -30,6 +46,36 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Post(
+     *     path="/category",
+     *     tags={"Category"},
+     *     description="Add new",
+     *     operationId="postCategory",
+     *     @OA\RequestBody(
+     *         description="Add new Category",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="Category Name",
+     *                     property="category_name",
+     *                     type="string"
+     *                 ),
+     *                 required={"category_name"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function store(Request $request)
     {
@@ -55,6 +101,29 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/category/{id}",
+     *     tags={"Category"},
+     *     description="View By Id",
+     *     operationId="showCategory",
+     *     @OA\Parameter(
+     *         description="ID of Category",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function show($id)
     {
         $category = Category::find($id);
@@ -67,6 +136,40 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/category/{id}",
+     *     tags={"Category"},
+     *     description="Update Data",
+     *     operationId="putCategory",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="category_name",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of Category",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Update Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -95,6 +198,31 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Delete(
+     *     path="/category/{id}",
+     *     tags={"Category"},
+     *     description="Delete Data",
+     *     operationId="destroyCategory",
+     *     @OA\Parameter(
+     *         description="ID of Category",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function destroy($id)
     {
       $category = Category::destroy($id);
@@ -106,6 +234,30 @@ class CategoryController extends Controller
      *
      * @param  str  $name
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/category/search/{name}",
+     *     tags={"Category"},
+     *     description="Search Data",
+     *     operationId="searchCategory",
+     *     @OA\Parameter(
+     *         description="Name of Category",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Search Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
      */
     public function search($name)
     {

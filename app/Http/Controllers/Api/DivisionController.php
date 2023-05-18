@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="Division",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class DivisionController extends Controller
 {
     use ApiResponser;
@@ -17,6 +24,15 @@ class DivisionController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/division",
+     *     tags={"Division"},
+     *     description="View All",
+     *     operationId="findAllDivision",
+     *     @OA\Response(response="default", description="Success get data")
+     * )
      */
     public function index()
     {
@@ -29,6 +45,36 @@ class DivisionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+     /**
+     * @OA\Post(
+     *     path="/division",
+     *     tags={"Division"},
+     *     description="Add new",
+     *     operationId="postDivision",
+     *     @OA\RequestBody(
+     *         description="Add new Division",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="Division Name",
+     *                     property="division_name",
+     *                     type="string"
+     *                 ),
+     *                 required={"division_name"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function store(Request $request)
     {
@@ -58,6 +104,29 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/division/{id}",
+     *     tags={"Division"},
+     *     description="View By Id",
+     *     operationId="showDivision",
+     *     @OA\Parameter(
+     *         description="ID of Division",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     )
+     * )
+     */
     public function show($id)
     {
         $division = Division::find($id);
@@ -71,6 +140,41 @@ class DivisionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/division/{id}",
+     *     tags={"Division"},
+     *     description="Update Data",
+     *     operationId="putDivision",
+     *     @OA\RequestBody(
+     *         description="Add new Division",
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="division_name",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of Division",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Update Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -99,6 +203,31 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Delete(
+     *     path="/division/{id}",
+     *     tags={"Division"},
+     *     description="Delete Data",
+     *     operationId="destroyDivision",
+     *     @OA\Parameter(
+     *         description="ID of Division",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function destroy($id)
     {
       $division = Division::destroy($id);
@@ -110,6 +239,30 @@ class DivisionController extends Controller
      *
      * @param  str  $name
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/division/search/{name}",
+     *     tags={"Division"},
+     *     description="Search Data",
+     *     operationId="searchDivision",
+     *     @OA\Parameter(
+     *         description="Name of Division",
+     *         in="path",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="string"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Search Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     * )
      */
     public function search($name)
     {

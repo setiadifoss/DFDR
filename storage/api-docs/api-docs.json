@@ -1,0 +1,3600 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "DFDR Swagger OpenAPI Documentation",
+        "description": "Endpoint from DFDR Application",
+        "contact": {
+            "email": "admin@dfdr.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "View All",
+                "operationId": "findAllCategory",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "Add new",
+                "operationId": "postCategory",
+                "requestBody": {
+                    "description": "Add new Category",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "category_name"
+                                ],
+                                "properties": {
+                                    "category_name": {
+                                        "description": "Category Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/category/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "View By Id",
+                "operationId": "showCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "Update Data",
+                "operationId": "putCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/category/search/{name}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "Search Data",
+                "operationId": "searchCategory",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/degree": {
+            "get": {
+                "tags": [
+                    "Degree"
+                ],
+                "description": "Degree",
+                "operationId": "a232c51f0a4dc742dd042fcef1b0982f",
+                "responses": {
+                    "default": {
+                        "description": "Degree Index"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Degree"
+                ],
+                "description": "Add new",
+                "operationId": "postDegree",
+                "requestBody": {
+                    "description": "Add new Degree",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "degree_name"
+                                ],
+                                "properties": {
+                                    "degree_name": {
+                                        "description": "Degree Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/degree/{id}": {
+            "get": {
+                "tags": [
+                    "Degree"
+                ],
+                "description": "View By Id",
+                "operationId": "showDegree",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Degree",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Degree"
+                ],
+                "description": "Update Data",
+                "operationId": "putDegree",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Degree",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add new Degree",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "degree_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Degree"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyDegree",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Degree",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/degree/search/{name}": {
+            "get": {
+                "tags": [
+                    "Degree"
+                ],
+                "description": "Search Data",
+                "operationId": "searchDegree",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Degree",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/department": {
+            "get": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "View All",
+                "operationId": "findAllDepartment",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Add new",
+                "operationId": "postDepartment",
+                "requestBody": {
+                    "description": "Add new Department",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "department_name"
+                                ],
+                                "properties": {
+                                    "department_name": {
+                                        "description": "Department Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/department/{id}": {
+            "get": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "View By Id",
+                "operationId": "showDepartment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Department",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Update Data",
+                "operationId": "putDepartment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Department",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add new Department",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "department_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyDepartment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Department",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/department/search/{name}": {
+            "get": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Search Data",
+                "operationId": "searchDepartment",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Department",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/division": {
+            "get": {
+                "tags": [
+                    "Division"
+                ],
+                "description": "View All",
+                "operationId": "findAllDivision",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Division"
+                ],
+                "description": "Add new",
+                "operationId": "postDivision",
+                "requestBody": {
+                    "description": "Add new Division",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "division_name"
+                                ],
+                                "properties": {
+                                    "division_name": {
+                                        "description": "Division Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/division/{id}": {
+            "get": {
+                "tags": [
+                    "Division"
+                ],
+                "description": "View By Id",
+                "operationId": "showDivision",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Division",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Division"
+                ],
+                "description": "Update Data",
+                "operationId": "putDivision",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Division",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add new Division",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "division_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Division"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyDivision",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Division",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/division/search/{name}": {
+            "get": {
+                "tags": [
+                    "Division"
+                ],
+                "description": "Search Data",
+                "operationId": "searchDivision",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Division",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/faculty": {
+            "get": {
+                "tags": [
+                    "Faculty"
+                ],
+                "description": "View All",
+                "operationId": "findAllFaculty",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Faculty"
+                ],
+                "description": "Add new",
+                "operationId": "postFaculty",
+                "requestBody": {
+                    "description": "Add new Faculty",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "faculty_name"
+                                ],
+                                "properties": {
+                                    "faculty_name": {
+                                        "description": "Faculty Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/faculty/{id}": {
+            "get": {
+                "tags": [
+                    "Faculty"
+                ],
+                "description": "View By Id",
+                "operationId": "showFaculty",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Faculty",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Faculty"
+                ],
+                "description": "Update Data",
+                "operationId": "putFaculty",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Faculty",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add new Faculty",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "faculty_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Faculty"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyFaculty",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Faculty",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/faculty/search/{name}": {
+            "get": {
+                "tags": [
+                    "Faculty"
+                ],
+                "description": "Search Data",
+                "operationId": "searchFaculty",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Faculty",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/show-image/{imagePath}/{fileName}": {
+            "get": {
+                "tags": [
+                    "Image"
+                ],
+                "description": "Search Data",
+                "operationId": "searchImage",
+                "parameters": [
+                    {
+                        "name": "imagePath",
+                        "in": "path",
+                        "description": "Image Path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    },
+                    {
+                        "name": "fileName",
+                        "in": "path",
+                        "description": "File Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/instruction": {
+            "get": {
+                "tags": [
+                    "Instruction"
+                ],
+                "description": "View All",
+                "operationId": "findAllInstruction",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Instruction"
+                ],
+                "description": "Add new",
+                "operationId": "postInstruction",
+                "requestBody": {
+                    "description": "Add new Instruction",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "instruction_name",
+                                    "instruction_desc"
+                                ],
+                                "properties": {
+                                    "instruction_name": {
+                                        "description": "Instruction Name",
+                                        "type": "string"
+                                    },
+                                    "instruction_desc": {
+                                        "description": "Instruction desc",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/instruction/{id}": {
+            "get": {
+                "tags": [
+                    "Instruction"
+                ],
+                "description": "View By Id",
+                "operationId": "showInstruction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Instruction",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Instruction"
+                ],
+                "description": "Update Data",
+                "operationId": "putInstruction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Instruction",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add new Instruction",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "instruction_name": {
+                                        "type": "string"
+                                    },
+                                    "instruction_desc": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Instruction"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyInstruction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Instruction",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/instruction/search/{name}": {
+            "get": {
+                "tags": [
+                    "Instruction"
+                ],
+                "description": "Search Data",
+                "operationId": "searchInstruction",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Instruction",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/language": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "description": "View All",
+                "operationId": "findAllLanguage",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "description": "Add new",
+                "operationId": "postLanguage",
+                "requestBody": {
+                    "description": "Add new Language",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "language_name"
+                                ],
+                                "properties": {
+                                    "language_name": {
+                                        "description": "Language Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/language/{id}": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "description": "View By Id",
+                "operationId": "showLanguage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Language",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Language"
+                ],
+                "description": "Update Data",
+                "operationId": "putLanguage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Language",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add new Language",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "language_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Language"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyLanguage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Language",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/language/search/{name}": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "description": "Search Data",
+                "operationId": "searchLanguage",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Language",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/news": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "description": "View All",
+                "operationId": "findAllNews",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "News"
+                ],
+                "description": "Add new",
+                "operationId": "postNews",
+                "requestBody": {
+                    "description": "Add new News",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "news_title",
+                                    "news_desc",
+                                    "news_thumb"
+                                ],
+                                "properties": {
+                                    "news_title": {
+                                        "description": "News Title",
+                                        "type": "string"
+                                    },
+                                    "news_desc": {
+                                        "description": "News Description",
+                                        "type": "string"
+                                    },
+                                    "news_thumb": {
+                                        "description": "News Thumbnail",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/news/{id}": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "description": "View By Id",
+                "operationId": "showNews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of News",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "News"
+                ],
+                "description": "Update Data",
+                "operationId": "putNews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of News",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "news_title": {
+                                        "type": "string"
+                                    },
+                                    "news_desc": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "News"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyNews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of News",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/news/search/{name}": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "description": "Search Data",
+                "operationId": "searchNews",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "News Title",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/get-notification": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "getNotification",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/get-notification-user": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "getNotificationUser",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            }
+        },
+        "/get-notification-upload": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "getNotificationUpload",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            }
+        },
+        "/get-notification-approval/{userId}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "getNotificationApprovalUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            }
+        },
+        "/read-notification-user/{id}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "readNotificationUser",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Notification User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            }
+        },
+        "/read-notification-upload/{id}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "readNotificationUpload",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Notification Upload",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            }
+        },
+        "/read-notification-approval/{id}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "description": "View All",
+                "operationId": "readNotificationApproval",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Notification Approval",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            }
+        },
+        "/creators": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Report",
+                "operationId": "656ef363f7cda3500f2c499c15f54938",
+                "responses": {
+                    "default": {
+                        "description": "Report show creator"
+                    }
+                }
+            }
+        },
+        "/list/data/type": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Report",
+                "operationId": "5b8de910e1d29cca2cb4fe5a0048171b",
+                "responses": {
+                    "default": {
+                        "description": "Report show type"
+                    }
+                }
+            }
+        },
+        "/list/data/subject": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Report",
+                "operationId": "be12a04948a436a7bd1960ba253e1915",
+                "responses": {
+                    "default": {
+                        "description": "Report show subject"
+                    }
+                }
+            }
+        },
+        "/group/count/deposit": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Report",
+                "operationId": "003ff37756d99371a2d4717d47c901d0",
+                "responses": {
+                    "default": {
+                        "description": "Report show Count Group Deposit"
+                    }
+                }
+            }
+        },
+        "/pdf/generated/report/": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "PDF Generated Report",
+                "operationId": "getPdfReportGenerated",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "filter": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    },
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "order": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "mode": {
+                                        "type": "string"
+                                    },
+                                    "report_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Check Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/pdf/deposit/{id}/report/": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "get Pdf Report Deposit",
+                "operationId": "getPdfReportDeposit",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Report",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/excel/import/report/": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Excel Form Import",
+                "operationId": "excelFormImport",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/excel/import/subject": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Excel Form Import subject",
+                "operationId": "importSubject",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/excel/export/subject": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "description": "Report",
+                "operationId": "c56d4ec7e00e3ddcf657115549c3bef6",
+                "responses": {
+                    "default": {
+                        "description": "Download Excel Subject"
+                    }
+                }
+            }
+        },
+        "/subject": {
+            "get": {
+                "tags": [
+                    "Subject"
+                ],
+                "description": "View All",
+                "operationId": "findAllSubject",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Subject"
+                ],
+                "description": "Add new",
+                "operationId": "postSubject",
+                "requestBody": {
+                    "description": "Add new Subject",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "subject_name"
+                                ],
+                                "properties": {
+                                    "subject_name": {
+                                        "description": "Subject Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/subject/{id}": {
+            "get": {
+                "tags": [
+                    "Subject"
+                ],
+                "description": "View By Id",
+                "operationId": "showSubject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Subject",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Subject"
+                ],
+                "description": "Update Data",
+                "operationId": "putSubject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Subject",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "subject_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Subject"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroySubject",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Subject",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/subject/search/{name}": {
+            "get": {
+                "tags": [
+                    "Subject"
+                ],
+                "description": "Search Data",
+                "operationId": "searchSubject",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Subject",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "View All",
+                "operationId": "findAllUser",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/editor": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "View All",
+                "operationId": "findAllUserEditor",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/contribution": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "View All",
+                "operationId": "findAllUserContribution",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/main": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "View All",
+                "operationId": "findAllUserMain",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/checkName": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "check User by name",
+                "operationId": "checkName",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/checkEmail": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "check User by email",
+                "operationId": "checkEmail",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/checkSpecific": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "check User by Specific",
+                "operationId": "checkSpecific",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "place_of_birth": {
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Check Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/checkPass/{id}": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "check User by Pass",
+                "operationId": "checkPass",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Check Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/checkCode": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "check User by Code",
+                "operationId": "checkCode",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "View By Id",
+                "operationId": "showUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/verified/{id}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "description": "verified User",
+                "operationId": "putUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approved": {
+                                        "type": "integer"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "passwordRe": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/updateData/{id}": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "updateData User",
+                "operationId": "postUpdateUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "upload_card": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/updateDataFull/{id}": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "updateData User",
+                "operationId": "postUpdateUserFull",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone",
+                                    "email",
+                                    "date_of_birth",
+                                    "place_of_birth",
+                                    "department",
+                                    "faculty",
+                                    "gender",
+                                    "year",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "example": "1990-01-01"
+                                    },
+                                    "place_of_birth": {
+                                        "type": "string"
+                                    },
+                                    "department": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                    },
+                                    "faculty": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 0
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "L"
+                                    },
+                                    "year": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 0
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "passwordRe": {
+                                        "type": "string"
+                                    },
+                                    "upload_card": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/changePass/{id}": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "change User Pass",
+                "operationId": "changePass",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of User",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "newPass": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Check Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/reqResetPass": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Request Reset Password",
+                "operationId": "reqResetPass",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Check Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/resetPass": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Reset Password",
+                "operationId": "resetPass",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "newPass": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Check Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/year": {
+            "get": {
+                "tags": [
+                    "Year"
+                ],
+                "description": "View All",
+                "operationId": "findAllYear",
+                "responses": {
+                    "default": {
+                        "description": "Success get data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Year"
+                ],
+                "description": "Add new",
+                "operationId": "postYear",
+                "requestBody": {
+                    "description": "Add new Year",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "year"
+                                ],
+                                "properties": {
+                                    "year": {
+                                        "description": "Year",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/year/{id}": {
+            "get": {
+                "tags": [
+                    "Year"
+                ],
+                "description": "View By Id",
+                "operationId": "showYear",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Year",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Year"
+                ],
+                "description": "Update Data",
+                "operationId": "putYear",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Year",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "year": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Update Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Year"
+                ],
+                "description": "Delete Data",
+                "operationId": "destroyYear",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Year",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Delete Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/year/search/{name}": {
+            "get": {
+                "tags": [
+                    "Year"
+                ],
+                "description": "Search Data",
+                "operationId": "searchYear",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Year",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Success Search Data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Register API",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone",
+                                    "email",
+                                    "date_of_birth",
+                                    "place_of_birth",
+                                    "department",
+                                    "faculty",
+                                    "gender",
+                                    "years",
+                                    "address",
+                                    "upload_card",
+                                    "created_from",
+                                    "role"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "example": "1990-01-01"
+                                    },
+                                    "place_of_birth": {
+                                        "type": "string"
+                                    },
+                                    "department": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                    },
+                                    "faculty": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 0
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "L"
+                                    },
+                                    "years": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 0
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "created_from": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "passwordRe": {
+                                        "type": "string"
+                                    },
+                                    "upload_card": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/registerAdmin": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Register Admin API",
+                "operationId": "registerAdmin",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone",
+                                    "email",
+                                    "date_of_birth",
+                                    "place_of_birth",
+                                    "gender",
+                                    "address",
+                                    "upload_card",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "example": "1990-01-01"
+                                    },
+                                    "place_of_birth": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "L"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "upload_card": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "login API",
+                "operationId": "postAuth",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email/Username",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Success Input Data"
+                    },
+                    "405": {
+                        "description": "Invalid Parameter"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Auth",
+                "operationId": "cc14526f9abd470d63047b1c05aef0c3",
+                "responses": {
+                    "default": {
+                        "description": "preAdmin Index"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/preAdmin": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Auth",
+                "operationId": "2f53e36e507cc531d17daed7e5b089d3",
+                "responses": {
+                    "default": {
+                        "description": "preAdmin Index"
+                    }
+                }
+            }
+        },
+        "/file/{file_name}": {
+            "get": {
+                "tags": [
+                    "File"
+                ],
+                "description": "File",
+                "operationId": "e63cd9520e1ffff330928d28a21a5e65",
+                "parameters": [
+                    {
+                        "name": "file_name",
+                        "in": "path",
+                        "description": "File Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Get File"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/preUsed": {
+            "get": {
+                "tags": [
+                    "Pre Use"
+                ],
+                "description": "Pre Use",
+                "operationId": "f1fa2814e1e993222707ce002468a4d5",
+                "responses": {
+                    "default": {
+                        "description": "Pre Use Index"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer -token from login-)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Category",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Degree",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Department",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Division",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Faculty",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Image",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Instruction",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Language",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "News",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Notification",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Report",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Subject",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "User",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Year",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth endpoints"
+        },
+        {
+            "name": "File",
+            "description": "API Endpoints of Projects"
+        },
+        {
+            "name": "Pre Use",
+            "description": "API Endpoints of Projects"
+        }
+    ]
+}

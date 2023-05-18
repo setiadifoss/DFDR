@@ -32,6 +32,13 @@ use App\Imports\EditorImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\File;
 
+/**
+ *
+ * @OA\Tag(
+ *     name="User",
+ *     description="API Endpoints of Projects"
+ * )
+*/
 class UserController extends Controller
 {
     use ApiResponser;
@@ -40,6 +47,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/user",
+     *     tags={"User"},
+     *     description="View All",
+     *     operationId="findAllUser",
+     *     @OA\Response(response="default", description="Success get data"),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function index()
     {
       // dd("die");
@@ -47,6 +64,16 @@ class UserController extends Controller
       return $this->success(['user' => $user]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/user/editor",
+     *     tags={"User"},
+     *     description="View All",
+     *     operationId="findAllUserEditor",
+     *     @OA\Response(response="default", description="Success get data"),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function userEditor()
     {
       $user = User::orderBy('id', 'DESC')
@@ -55,6 +82,17 @@ class UserController extends Controller
       return $this->success(['user' => $user]);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/user/contribution",
+     *     tags={"User"},
+     *     description="View All",
+     *     operationId="findAllUserContribution",
+     *     @OA\Response(response="default", description="Success get data"),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function userDepositCont()
     {
       $user = User::orderBy('id', 'DESC')
@@ -73,6 +111,16 @@ class UserController extends Controller
       return $this->success(['user' => $user]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/user/main",
+     *     tags={"User"},
+     *     description="View All",
+     *     operationId="findAllUserMain",
+     *     @OA\Response(response="default", description="Success get data"),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function userMain()
     {
       $user = User::orderBy('id', 'DESC')
@@ -87,6 +135,29 @@ class UserController extends Controller
       return $this->success(['name' => $fileName]);
     }
     
+    /**
+     * @OA\Post(
+     *     path="/user/checkName",
+     *     tags={"User"},
+     *     description="check User by name",
+     *     operationId="checkName",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function checkName(Request $request)
     {
         $request->validate([
@@ -99,6 +170,29 @@ class UserController extends Controller
           return $this->success(null,"data new");
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/checkEmail",
+     *     tags={"User"},
+     *     description="check User by email",
+     *     operationId="checkEmail",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function checkEmail(Request $request)
     {
         $request->validate([
@@ -111,6 +205,41 @@ class UserController extends Controller
           return $this->success(null,"data new");
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/checkSpecific",
+     *     tags={"User"},
+     *     description="check User by Specific",
+     *     operationId="checkSpecific",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="place_of_birth",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="date_of_birth",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="gender",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Check Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function checkSpecific(Request $request)
     {
         $request->validate([
@@ -131,6 +260,39 @@ class UserController extends Controller
           return $this->success(null,"data new");
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/checkPass/{id}",
+     *     tags={"User"},
+     *     description="check User by Pass",
+     *     operationId="checkPass",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Check Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function checkPass(Request $request, $id)
     {
       $request->validate([
@@ -145,6 +307,33 @@ class UserController extends Controller
         return $this->error("data unexist");
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/checkCode",
+     *     tags={"User"},
+     *     description="check User by Code",
+     *     operationId="checkCode",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="code",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function checkCode(Request $request)
     {
         $request->validate([
@@ -182,6 +371,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     /**
+     * @OA\Get(
+     *     path="/user/{id}",
+     *     tags={"User"},
+     *     description="View By Id",
+     *     operationId="showUser",
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function show($id)
     {
         $user = User::find($id);
@@ -194,6 +407,47 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Put(
+     *     path="/user/verified/{id}",
+     *     tags={"User"},
+     *     description="verified User",
+     *     operationId="putUser",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="approved",
+     *                     type="integer"
+     *                 ),
+     *              @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="passwordRe",
+     *                     type="string"
+     *                 ),
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -243,6 +497,61 @@ class UserController extends Controller
         return $this->success(null, "data success");
     }
 
+
+    /**
+     * @OA\Post(
+     *     path="/user/updateData/{id}",
+     *     tags={"User"},
+     *     description="updateData User",
+     *     operationId="postUpdateUser",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"name","email","phone", "address"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="file to upload",
+     *                     property="upload_card",
+     *                     type="string",
+     *                     format="binary",
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function updateData(Request $request, $id)
     {
       $request->validate([
@@ -275,6 +584,105 @@ class UserController extends Controller
       return $this->success(['user' => $user]);
     }
 
+
+    /**
+     * @OA\Post(
+     *     path="/user/updateDataFull/{id}",
+     *     tags={"User"},
+     *     description="updateData User",
+     *     operationId="postUpdateUserFull",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={
+     *                      "name","phone","email","date_of_birth",
+     *                      "place_of_birth","department","faculty","gender",
+     *                      "year","address"
+     *                 },
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="date_of_birth",
+     *                     type="string",
+     *                     example="1990-01-01"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="place_of_birth",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="department",
+     *                     type="integer",
+     *                     format="int64",
+     *                     example=1
+     *                 ),
+     *                 @OA\Property(
+     *                     property="faculty",
+     *                     type="integer",
+     *                     format="int64",
+     *                     example=0
+     *                 ),
+     *                 @OA\Property(
+     *                     property="gender",
+     *                     type="string",
+     *                     example="L"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="year",
+     *                     type="integer",
+     *                     format="int64",
+     *                     example=0
+     *                 ),
+     *                 @OA\Property(
+     *                     property="address",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="passwordRe",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     description="file to upload",
+     *                     property="upload_card",
+     *                     type="string",
+     *                     format="binary",
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Input Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function updateDataFull(Request $request, $id) 
     {
       $request->validate([
@@ -292,7 +700,20 @@ class UserController extends Controller
 
       $user = User::find($id);
       $y = $user->password;
-      $user->update($request->all());
+      $newPassword = $request->password;
+      $newRePassword = $request->passwordRe;
+
+      $user->name = $request->name;
+      $user->phone = $request->phone;
+      $user->email = $request->email;
+      $user->date_of_birth = $request->date_of_birth;
+      $user->place_of_birth = $request->place_of_birth;
+      $user->department = $request->department;
+      $user->faculty = $request->faculty;
+      $user->gender = $request->gender;
+      $user->years = $request->year;
+      $user->address = $request->address;
+      $user->save();
       
       if ($request->file('upload_card') != "")
       {
@@ -306,7 +727,10 @@ class UserController extends Controller
         $user->save();
       }
 
-      if ($request->password != 'undefined' || $request->passwordRe != 'undefined')  // true
+      if (($newPassword != 'undefined' || $newRePassword != 'undefined')
+      && ($newPassword != '' || $newRePassword != '')
+      && ($newPassword != null || $newRePassword != null)
+      && ($newPassword == $newRePassword))  // true
       {
         $user->password = bcrypt($request->passwordRe);
         $user->save();
@@ -317,9 +741,46 @@ class UserController extends Controller
         $user->save();
       }
       
-      return $this->success(['user' => $request->name]);
+      return $this->success(['user' => $user]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/changePass/{id}",
+     *     tags={"User"},
+     *     description="change User Pass",
+     *     operationId="changePass",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="newPass",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Check Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function changePass(Request $request, $id)
     {
       $request->validate([
@@ -340,6 +801,29 @@ class UserController extends Controller
         return $this->error("data unexist");
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/reqResetPass",
+     *     tags={"User"},
+     *     description="Request Reset Password",
+     *     operationId="reqResetPass",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Check Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function reqResetPass(Request $request)
     {
       $request->validate([
@@ -367,6 +851,41 @@ class UserController extends Controller
       return $this->success($resToken);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/user/resetPass",
+     *     tags={"User"},
+     *     description="Reset Password",
+     *     operationId="resetPass",
+     *     @OA\RequestBody(
+     *         required=true,
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="code",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *              @OA\Property(
+     *                     property="newPass",
+     *                     type="string"
+     *                 )
+     *          )
+     *     ),
+     *     @OA\Response(response="default", description="Success Check Data"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *     security={{"bearerAuth":{}}}, 
+     * )
+     */
     public function resetPass(Request $request)
     {
       $request->validate([
@@ -396,6 +915,31 @@ class UserController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Delete(
+     *     path="/user/{id}",
+     *     tags={"User"},
+     *     description="Delete Data",
+     *     operationId="destroyUser",
+     *     @OA\Parameter(
+     *         description="ID of User",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
+     *     @OA\Response(response="default", description="Success Delete Data"),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid Parameter",
+     *     ),
+     *    security={{"bearerAuth":{}}}, 
+     * )
      */
     public function destroy($id)
     {
